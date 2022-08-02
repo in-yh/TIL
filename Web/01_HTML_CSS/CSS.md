@@ -154,4 +154,35 @@
    <h2 id="red" class="blue" style="color: yellow;">8</h2> 다크바이올렛
    ```
 
+3. CSS 상속 - MDN에서 확인 가능
+
+   가) CSS는 상속을 통해 부모 요소의 속성을 자식에게 상속
+
+     1)속성(프로퍼티) 중에는 상속이 되는 것과 되지 않는 것들이 있다.
+
+     2)상속되는 것 예시
+
+       * Text 관련 요소(font, color, text-align), opacity(투명도), visibility(hidden) 등
+
+     3)상속 되지 않는 것 예시
+
+   * Box model 관련 요소(width, height, margin, padding, border, box-sizing, display), position 관련 요소(position, top/right/bottom/left, z-index) 등
+
+   ```html
+   <body>
+       <p>안녕하세요! <span>테스트</span> 입니다.</p>
+   </body>
    
+   <style>
+     p {
+       /* 상속됨 */
+       color: red;
+       /* 상속 안됨 */
+       border: 3px solid black;
+     }
+     span{      
+     }
+   </style>
+   ```
+
+4. CSS 기본 스타일
