@@ -384,12 +384,12 @@
    ```
 
    ```html
-   	#ssafy > p:nth-child(2) {
+   	#ssap > p:nth-child(2) {
    		color: red;
    	}
    n번째 자식이 p 태그(해당 태그)가 아니면 적용시키지 않음, p 태그(해당 태그)면 적용
    
-   	#ssafy > p:nth-of-type(2) {
+   	#ssap > p:nth-of-type(2) {
    		color: blue;
    	}
    p 태그(해당 태그)만의 순서를 세고 n번째 자식을 바꿈(어떤 태그가 중간에 끼어도 상관없음)
