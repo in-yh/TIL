@@ -323,6 +323,7 @@
    가) 자손 결합자(공백) : selector A 하위의 모든 selector B 요소
 
    ```html
+   /* div 내에 있는 span을 모두 바꿔줌 */
    <style>
      div span {
        color: red;      
@@ -337,10 +338,11 @@
      </p>
    </div>
    ```
-
+   
    나) 자식 결합자(>) : selector A 바로 아래의 selector B 요소
-
+   
    ```html
+   /* div 바로 아래에 있는 span만 바꿔줌 */
    <style>
      div > span {
        color: red;      
@@ -357,7 +359,7 @@
    ```
 
    다) 일반 형제 결합자(~) : selector A의 형제 요소 중 뒤에 위치하는 selector B 요소를 모두 선택
-
+   
    ```html
    <style>
      p ~ span {
@@ -373,8 +375,8 @@
    <span>이건 빨강입니다.</span>
    ```
 
-   라) 인접 형제 결함자(+) : selector A의 형제 요소 중 바로 뒤에 위치하는 selector B 요소를 선택
-
+   라) 인접 형제 결합자(+) : selector A의 형제 요소 중 바로 뒤에 위치하는 selector B 요소를 선택
+   
    ```html
    <style>
      p + span {
@@ -388,7 +390,7 @@
    <b>코드있음</b>
    <span>이건 빨강이 아니다. p태그와 인접한 형제가 아니기 때문</span>
    ```
-
+   
    ```html
    	#ssap > p:nth-child(2) {
    		color: red;
@@ -399,6 +401,40 @@
    		color: blue;
    	}
    p 태그(해당 태그)만의 순서를 세고 n번째 자식을 바꿈(어떤 태그가 중간에 끼어도 상관없음)
+   ```
+   
+   ```html
+     <head>
+       <style>
+         * {
+           color: black;
+         }
+         p ~ span {
+           color: orange;
+         }
+         p + p {
+           color: red;
+         }
+       </style>
+     </head>
+   
+     <body>
+       <span>0</span>
+       <p>1</p>
+       <p>2</p> <!-- red -->
+       <span>3</span> <!-- orange -->
+       <p>4</p>
+       <div class="box">
+         <p>5</p>
+       </div>
+       <article>기사</article>
+       <ul>
+         <li>6</li>
+         <li>7</li>
+         <li>8</li>
+       </ul>
+       <span>9</span> <!-- orange -->
+     </body>
    ```
 
 마.  CSS Box model 

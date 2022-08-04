@@ -408,3 +408,21 @@
 </table>
 ```
 
+```html
+<!-- 
+USERNAME : 네모박스(아이디를 입력 해 주세요.) 
+PWD:네모박스 로그인
+만들기
+-->
+<body>
+  <form action="">
+    <label for="username">USERNAME : </label>
+    <input type="text" id="username" placeholder="아이디를 입력 해 주세요."> <!-- for과 id 묶어줌, type은 텍스트, 빈칸에 글자 두려면 placeholder -->
+    <br>
+    <label for="password">PWD : </label>
+    <input type="password" id="password"> <!-- type이 password -->
+    <button id="btn">로그인</button> <!-- 이거보다 나중에 나올 부트스트랩 버튼 참고하자! -->
+  </form>
+</body>
+```
+
