@@ -37,7 +37,7 @@
 
      1)웹에서 표준적으로 사용되는 기술이나 규칙
 
-     2)어떤 브라우저든 웹 페이지가 동일하게 보이도록 함(크로스 브라우징) -> 어딜가도 똑같이 나온다. (W3C, WHATWG)
+     2)어떤 브라우저든 웹 페이지가 동일하게 보이도록 함(크로스 브라우징) -> 어딜가도 똑같이 나온다. (W3C, WHATWG) mozilla재단 아님
 
      3)브라우저별 호환성 체크 -> Can I Use
 
@@ -364,4 +364,47 @@
    </footer>
    ```
 
-   
+
++EXTRA
+
+```html
+# 표(table) 만들기 tr : 행만들기, td : 열만들기, th : 헤드만들기
+<table>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+```
+
