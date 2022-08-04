@@ -687,8 +687,10 @@
      </style>
    </head>
    <body>
+     <!-- container 쓰는 순간 margin이 생김, 안쓰면 공백없이 너무 불편해보임 -->
      <div class="container">
        <h2 class="text-center">column</h2>
+       <!-- 배열이 왼쪽에서 오른쪽으로 잘 되게끔.. -->
        <div class="row">
          <div class="col box">1</div>
          <div class="col box">2</div>
