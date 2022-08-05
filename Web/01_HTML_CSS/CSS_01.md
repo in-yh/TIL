@@ -65,6 +65,8 @@
    ctrl + b : 목록 열고 숨기기
    h1*5 : 5개 만들어짐
    shift alt 화살표 아래 : 커서 여러 개 만들어져서 같이 쓸 수 있음
+   div.large-box + tab : <div class="large-box"></div> 생김
+   link + tab : link 구조 생김, css 파일 연결할 때 쓰임
    ```
 
 3. CSS 개발자 도구(F12)

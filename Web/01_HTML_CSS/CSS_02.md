@@ -117,7 +117,43 @@
    |                2
    | 축이 이렇게 생김 1 main axis / 오른쪽 왼쪽이 cross axis
          
+   나중에 부트스트랩에서는
+   clss="d-flex flex-row-reverse" 으로 명기
+   ```
+
+   ```html
    Flex는 부모 요소에 적용시켜야 됨!! Item한테 하는게 아니다!! (사각형 안에 정렬하는 것임!!)
+   <head>
+     <style>
+       .outer-box {
+         border: black 1px dotted ;
+         height: 200px;
+         width: 600px;
+       }
+   
+       .inner-box {
+         display: flex;
+         justify-content: space-between; /* 바로 위 부모에게 적용해야 함 */
+         border: red 1px solid;
+         height: 200px;
+         width: 300px;
+       }
+   
+       .box {
+         height: 100px;
+         width: 100px;
+         background-color: skyblue;
+       }
+     </style>
+   </head>
+   <body>
+     <div class="outer-box">
+       <div class="inner-box">
+         <div class="box">item1</div>
+         <div class="box">item2</div>
+       </div>
+     </div>
+   </body>
    ```
 
 2. 왜 Flexbox를 사용해야하나? 이전까지 Normal Flow를 벗어나는 수단은 Float 혹은 Position, 수직 정렬 & 아이템의 너비와 높이 혹은 간격을 동일하게 배치하기 위해
