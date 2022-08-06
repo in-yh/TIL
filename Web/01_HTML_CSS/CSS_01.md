@@ -209,6 +209,43 @@
 
      3)같은 디바이스일 때!
 
+     ```html
+     css 일부
+       .card {
+         width: 500px;
+         border: 2px dashed black;
+         margin-left: auto; /* 가운데로 위치 */
+         margin-right: auto;
+       }
+     
+       .card-nav {
+         text-align: center;
+         background-color: greenyellow;
+       }
+     
+       .card-header {
+         padding: 20px;
+       }
+     
+       .card-img {
+         width: 100%;
+         height: 330px;
+     
+     
+     html 일부
+       <body>
+         <div class="container">
+           <div class="card">
+             <div class="card-nav">
+               <h2>오늘의 명소</h2>
+             </div>
+     
+             <div class="card-header">
+               <img src="./image.JPG" alt="card image" class="card-img">
+                 
+     => 부모 태그 너비의 100%를 차지하는데, 부모가 바로 위 부모가 아니어도 되네. 
+     ```
+
    다) em
 
      1)(바로 위, 부모 요소에 대한) 상속의 영향을 받음
@@ -317,6 +354,12 @@
    다) 기타 HTML 태그별 스타일링
 
      1)li(목록), table(표)
+   
+   ```html
+   .white {
+     background-color: white;
+   }
+   ```
 
 라. Selectors 심화
 
@@ -469,6 +512,8 @@
      margin-left: 40px;
    }
    
+   margin: auto 자동으로 마진 생성
+   
    <!--shorthand를 통해서 표현 가능-->
    .margin-1 {
      margin: 10px; <!--상하좌우-->
@@ -488,7 +533,7 @@
    ```
 
    라) padding
-
+   
    ```html
    .margin-padding {
      margin: 10px;
@@ -497,7 +542,7 @@
    ```
 
    마) border
-
+   
    ```html
    .border {
      border-width: 2px;
@@ -509,10 +554,15 @@
    .border {
      border: 2px dashed black;
    }
+   
+   .border {
+     border: 1px solid black;
+     border-radius: 4px; <!-- 테두리 모서리 반경을 4px로 설정, 모서리를 둥글게 -->
+   }
    ```
-
+   
    바) 실습
-
+   
    ```html
    <body>
        <div class="box1">div</div>
@@ -536,7 +586,7 @@
      }
    </style>
    ```
-
+   
    ```html
    <body>
        <div class="box">content-box</div>
@@ -690,7 +740,7 @@
 
      1)relative : 상대 위치
 
-      * 자기 자신의 static 위치를 기준으로 이동(normal flow 유지)
+      * 자기 자신의 static 위치를 기준으로 이동(normal flow 유지), 만약 왼쪽 위에 어떤 상자가 존재하면 그 아래에 자기자신의 static을 형성함.
 
       * 레이아웃에서 요소가 차지하는 공간은 static일 때와 같음(기존 위치(normal position) 대비 offset)
 
@@ -754,8 +804,8 @@
        
      .parent{
        position: relative;
-       width: 300px
-       height: 300px
+       width: 300px;
+       height: 300px;
      }
    </style>
    
@@ -767,9 +817,9 @@
    3,1   3,2   3,3
    
    1,1에 형이 있고 2,1에 동생이 있을 때
-   형에게 top: 100px;을 적용했을 때 absolute와 relative의 차이는?
+   형에게 top: 100px; left : 100px; 을 적용했을 때 absolute와 relative의 차이는?
    
-   absolute라면 형은 2,2로 동생은 1,1로 간다. 형의 기존 1,1은 없어지기 때문, 동생자리가 있기에 형은 2,1이 아닌 2,2로 가는건가?
+   absolute라면 형은 2,2로 동생은 1,1로 간다. 형의 기존 1,1은 없어지기 때문
    relative라면 형은 2,2로 동생은 2,1 그대로이다. 형의 기존 1,1 없어지는 게 아님.
    ```
 

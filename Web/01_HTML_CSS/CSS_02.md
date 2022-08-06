@@ -802,6 +802,120 @@
    </body>
    </html>
    ```
+   
+   ```html
+   <!-- CDN 꼭 넣기!! -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"> 
+   </head>
+   <body>
+     <div class="container">
+       <div class="row">
+         <div class="col">
+           <h1>Bootstrap Grid System 1</h1>
+         </div>
+       </div>
+   
+       <!-- 1. -->
+       <div class="row">
+         <div class="item col-4">
+           <p>1</p>
+         </div>
+         <div class="item col-4">
+           <p>2</p>
+         </div>
+         <div class="item col-4">
+           <p>3</p>
+         </div>
+       </div>
+       <!-- col을 3으로 바꾸면 공백 생김. 공백은 보라색, 여백은 주황색 -->
+   
+       <!-- 4. -->
+       <div class="row">
+         <div class="item col-2">
+           <p>1</p>
+         </div>
+         <div class="item col-9">
+           <p>2</p>
+         </div>
+         <div class="item col-"> <!-- 공백으로 두면 12가 디폴트, 다음 줄에 표현됨 -->
+           <p>3</p>
+         </div> 
+       </div>
+   
+       <!-- sm : 576이상 / md : 768px이상 / lg : 992px / xl : 1200px / xxl : 1400px -->
+       <!-- 3. -->
+       <div class="row">
+         <div class="item col-4 col-sm-3 col-md-6">
+           <p>576px 미만 4 <br> 768px 미만 3 <br> 768px 이상 6</p>
+         </div>
+         <div class="item col-6 col-sm-3 col-md-6">
+           <p>576px 미만 6 <br> 768px 미만 3 <br> 768px 이상 6</p>
+         </div>
+         <div class="item col-2 col-sm-6 col-md-12">
+           <p>576px 미만 2 <br> 768px 미만 6 <br> 768px 이상 12</p>
+         </div>
+       </div>
+   
+   
+       <!-- 4. -->
+       <div class="row">
+         <div class="item col-12 col-md-4 col-xl-2">
+           <p>768px 미만 12 <br> 768px 이상 4 <br> 1200px 이상 2</p>
+         </div>
+         <div class="item col-12 col-md-4 col-xl-2">
+           <p>768px 미만 12 <br> 768px 이상 4 <br> 1200px 이상 2</p>
+         </div>
+         <div class="item col-12 col-md-4 col-xl-12">
+           <p>768px 미만 12 <br> 768px 이상 4 <br> 1200px 이상 12</p>
+         </div>
+       </div>
+       <!-- 그냥 col-12하면 500으로 잡힘, col-sm-12로 해줘야함, 근데 col-12도 되는 듯? -->
+         
+       <!-- 1. -->
+       <div class="row">
+         <div class="item col-4 col-md-4">
+           <p>item1</p>
+         </div>
+         <div class="item col-8 col-md-4 offset-md-4"> <!-- md 때 박스4/공백4/박스4 생김 -->
+           <p>item2</p>
+         </div>
+       </div>
+   
+   
+       <!-- 2. -->
+       <div class="row">
+         <div class="item col-4 col-md-4 offset-md-4 col-lg-5 offset-lg-7">
+           <p>item1</p>
+         </div>
+         <div class="item col-4 offset-4 col-md-4 offset-md-0 col-lg-8 offset-lg-2"> 
+         <!-- offset-md-0 중간에 안해주면 다음줄로 넘어감.. -->
+           <p>item2</p>
+         </div>
+       </div>
+       
+   
+       <!-- 3. -->
+       <div class="row">
+         <div class="item col-12 col-md-3"> <!-- lg는 안적어도 됨, md는 이상이니깐-->
+           item1
+         </div>
+         <div class="item col-12 col-md-9">
+           <div class="row">
+             <div class="item col-6 col-lg-3">item2</div> <!-- md는 안 적어도 됨, col과 같으니깐, lg는 해야됨 -->
+             <div class="item col-6 col-lg-3">item3</div>
+             <div class="item col-6 col-lg-3">item4</div>
+             <div class="item col-6 col-lg-3">item5</div>
+           </div>
+         </div>
+       </div>
+   
+     </div>
+     
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+   </body>
+   ```
+   
+   
 
 +연습문제
 
@@ -898,6 +1012,165 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>
+```
+
+```html
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+  <!-- container 쓰는 순간 margin이 생김, 안쓰면 공백없이 너무 불편해보임 -->
+  <div class="container">
+    <!-- 배열이 왼쪽에서 오른쪽으로 잘 되게끔.. -->
+    <div class="row">
+      <div> <!-- 추가해주니 작은 박스가 됨?? -->
+        <!-- type 바꾸면 나중에 데이터를 전송해줌 -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <!-- <button type="submit" class="btn btn-warning">Update</button>
+        <button type="submit" class="btn btn-danger">Delete</button> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 닫는 body 바로 위에 고정 -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+```
+
+```html
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body> 
+...
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarBreakfast" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              아침
+            </a>
+            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarBreakfast"> <!--id와 aria-labelledby 연결해줘야해, dropdown 제목과 그 아래 항목들을 연결해줌 -->
+              <li><a class="dropdown-item" href="#">오믈렛</a></li>
+              <li><a class="dropdown-item" href="#">샌드위치</a></li>
+              <li><a class="dropdown-item" href="#">팬케이크</a></li>
+              <li><a class="dropdown-item" href="#">김밥</a></li>
+              <li><a class="dropdown-item" href="#">주먹밥</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarLunch" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              점심
+            </a>
+            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLunch">
+              <li><a class="dropdown-item" href="#">샐러드</a></li>
+              <li><a class="dropdown-item" href="#">떡볶이</a></li>
+              <li><a class="dropdown-item" href="#">햄버거</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">저녁</a> <!--누를 수 있게-->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">야식</a> <!--누를 수 없게-->
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+```
+
+```html
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="row my-3">
+      <nav aria-label="...">
+        <ul class="pagination"> <!-- pagination -->
+          <li class="page-item disabled"> <!-- disabled : 비활성화, 클릭 안되게 함 -->
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
+          </li>
+          <li class="page-item active" aria-current="page"> <!-- active : 활성화시킴 -->
+            <a class="page-link" href="#">1</a>
+          </li> 
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>  
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+```
+
+```html
+<!-- 부트스트랩 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <!-- css 파일도 가져옴, 두개의 css 파일은 순서대로 적용됨 -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- 1. Nav -->
+  <nav class="d-flex justify-content-between align-items-center bg-dark fixed-top">
+    <a href="#">
+      <img src="images/logo.png" alt="Logo Image">
+    </a>
+    <!-- ul태그여서 수직으로 나열되었으나 list-unstyled 하면 앞에 동그라미 없앰, d-flex 사용하면 가로로 나열하게 됨 -->
+    <ul class="d-flex list-unstyled">
+    <!-- 공간 사이에 공백 줘야하니 margin을 사용해야함. li에 넣어야 많이 줄 수 있음. -->
+      <li class="mx-3"><a href="#" class="text-decoration-none text-light">Home</a></li>
+      <li class="mx-3"><a href="#" class="text-decoration-none text-light">Community</a></li>
+      <li class="mx-3"><a href="#" class="text-decoration-none text-light">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- 2. Header -->
+  <header class="d-flex flex-column justify-content-center align-items-center">
+      <!-- h2 태그로도 가능하지만 div 태그로도 바꿔볼 수 있다. -->
+      <div class="display-3 fw-bold text-light my-1">Cinema</div>
+      <div class="display-3 fw-bold text-light my-1">Community</div>
+      <!-- a태그 안에 btn 넣을 수 있음. btn은 색상을 같이 줘야 눈에 보임. btn-lg하면 버튼 크게 할 수 있음. 글씨색은 자동으로 바뀜 -->
+      <a href="#" class="btn btn-primary btn-lg mt-3">Let's Go</a></button>     
+  </header>
+
+  <!-- 3. Section -->
+  <!-- 여기도 수직정렬 해줘야함 -->
+  <section class="d-flex flex-column justify-content-center align-items-center">
+    <!-- text center 해줄 수 있음. 공백은 마음대로 -->
+    <h2 class="mt-4">Used Skills</h2>
+    <article class="d-flex justify-content-around align-items-center">
+      <div>
+        <img src="images/web.png" alt="Web Image">
+        <p class="text-center">Web</p>
+      </div>
+      <div>
+        <img src="images/html5.png" alt="HTML5 Image">
+        <p class="text-center">HTML5</p>
+      </div>
+      <div>
+        <img src="images/css3.png" alt="CSS3 Image">
+        <p class="text-center">CSS3</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- 4. Footer -->
+  <footer class="d-flex justify-content-center align-items-center fixed-bottom bg-primary">
+    <p class="text-light my-0">HTML & CSS project. Created by Yuhyun Jeong</p>
+  </footer>
+
+  <!-- 부트스트랩 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+
 ```
 
 
