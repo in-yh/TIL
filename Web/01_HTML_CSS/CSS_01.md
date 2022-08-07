@@ -886,3 +886,11 @@ cf) 상대주소 : ../images/ ~~~ .png
 <a href="링크할 주소"><img src="사진 주소(절대주소, 상대주소)" alt="사진 안 나올 시 어떤 문구 나오게 할건지"></a>
 ```
 
+```html
+CSS 파일로 body 전체에 padding-top 간격을 주면 적당한 위치에서 시작할 수 있음. (nav가 fixed라서 붕 뜨게 되기 때문에 padding을 안주면 nav에 가려짐)
+
+body {
+  padding-top: 66px;
+}
+```
+

@@ -522,7 +522,7 @@
      <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color">
    
      <h2>Navbar</h2>
-     <nav class="navbar navbar-expand-lg bg-secondary">
+     <nav class="navbar navbar-expand-lg bg-secondary"> <!-- navbar-dark는 해당 페이지에 있을 때 nav 이름을 활성화 시켜주기 위한 클래스 -->
        <div class="container-fluid">
          <a class="navbar-brand" href="#">Navbar</a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -531,7 +531,7 @@
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
              <li class="nav-item">
-               <a class="nav-link active" aria-current="page" href="#">Home</a>
+               <a class="nav-link active" aria-current="page" href="#">Home</a> <!-- active와 aria-current="page" 추가해야 해당 페이지에서 nav 이름 활성화됨 -->
              </li>
              <li class="nav-item">
                <a class="nav-link" href="#">Link</a>
@@ -606,7 +606,7 @@
    </button>
    
    <!-- Modal -->
-   <!-- 중첩해서 들어가 있으면 안 됨, body랑 같은 레벨에 넣기 -->
+   <!-- 중첩해서 들어가 있으면 안 됨!!, body랑 같은 레벨에 넣기 -->
    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> <!--여기 id랑 위에 data-bs-target이랑 묶어주는 거임-->
      <div class="modal-dialog">
        <div class="modal-content">
@@ -723,7 +723,7 @@
      </style>
    </head>
    <body>
-     <!-- container 쓰는 순간 margin이 생김, 안쓰면 공백없이 너무 불편해보임 -->
+     <!-- container 쓰는 순간 margin이 생김, 좌우 여백 자동적으로 생김!!, 안쓰면 공백없이 너무 불편해보임 -->
      <div class="container">
        <h2 class="text-center">column</h2>
        <!-- 배열이 왼쪽에서 오른쪽으로 잘 되게끔.. -->
@@ -888,7 +888,7 @@
            <p>item1</p>
          </div>
          <div class="item col-4 offset-4 col-md-4 offset-md-0 col-lg-8 offset-lg-2"> 
-         <!-- offset-md-0 중간에 안해주면 다음줄로 넘어감.. -->
+         <!-- offset-md-0 중간에 안해주면 다음줄로 넘어감.. 같은 줄에 있는 col-4 offset-4의 offset-4의 영향을 받는 듯 -->
            <p>item2</p>
          </div>
        </div>
@@ -915,7 +915,82 @@
    </body>
    ```
    
+   ```html
+     <main class="container">
+       <h1 class="fw-bold fs-2">Community</h1>
+       <div class="row">
+         <!-- Aside - 게시판 목록 -->
+         <aside class="col-12 col-lg-2"> <!-- lg 미만까지는 column 전체에 할당, lg 이상부터는 column 2줄에 할당-->
+           <ul class="list-group">
+             <li class="list-group-item"><a href="#" class="text-decoration-none">Boxoffice</a></li>
+             <li class="list-group-item"><a href="#" class="text-decoration-none">Movies</a></li>
+             <li class="list-group-item"><a href="#" class="text-decoration-none">Genres</a></li>
+             <li class="list-group-item"><a href="#" class="text-decoration-none">Actors</a></li>
+           </ul>
+         </aside>
    
+         <!-- Section - 게시판 -->
+         <section class="col-12 col-lg-10"> <!-- lg 미만까지는 column 전체에 할당, lg 이상부터는 column 10줄에 할당-->
+           <div class="row table-responsive">          
+             <table class="table table-striped table-hover d-none d-lg-block"> <!-- lg 미만까지는 표 안 보이게 하고, lg 이상부터는 표 보이게 함. -->
+               <thead class="table-dark">
+                 <tr>
+                   <th scope="col" class="col-2">영화 제목</th> <!-- col-2 넣어줘야 표가 전체적으로 나옴. 안해주면 중간사이즈?로 나옴 -->
+                   <th scope="col" class="col-2">글 제목</th>
+                   <th scope="col" class="col-2">작성자</th>
+                   <th scope="col" class="col-2">작성 시간</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <th scope="row">Great Movie title</th>
+                   <td>Best Movie Ever</td>
+                   <td>user</td>
+                   <td>1 minute ago</td>
+                 </tr>
+                 <tr>
+                   <th scope="row">Great Movie title</th>
+                   <td>Movie test</td>
+                   <td>user</td>
+                   <td>1 minute ago</td>
+                 </tr>
+                 <tr>
+                   <th scope="row">Great Movie title</th>
+                   <td>Movie test</td>
+                   <td>user</td>
+                   <td>1 minute ago</td>
+                 </tr>
+                 <tr>
+                   <th scope="row">Great Movie title</th>
+                   <td>Movie test</td>
+                   <td>user</td>
+                   <td>1 minute ago</td>
+                 </tr>
+               </tbody>
+             </table>
+           </div>
+           <div class="row">
+             <article class="d-block d-lg-none"> <!-- lg 미만까지는 보이게 하고, lg 이상부터는 안 보이게 함. -->
+               <hr>
+               <div class="fs-2">Best Movie Ever</div>
+               <div class="fs-4">Great Movie Title</div>
+               <div class="fs-6 mb-2">user</div>
+               <div class="fs-6">1 minute ago</div>
+               <hr>
+               <div class="fs-2">Movie Test</div>
+               <div class="fs-4">Great Movie Title</div>
+               <div class="fs-6 mb-2">user</div>
+               <div class="fs-6">1 minute ago</div>
+               <hr>
+               <div class="fs-2">Movie Test</div>
+               <div class="fs-4">Great Movie Title</div>
+               <div class="fs-6 mb-2">user</div>
+               <div class="fs-6">1 minute ago</div>
+             </article>
+           </div>
+         </section>
+       </div>
+   ```
 
 +연습문제
 
@@ -1170,7 +1245,35 @@
   <!-- 부트스트랩 CDN -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
+```
 
+```html
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="01_nav_footer.css">
+  <title>Community</title>
+</head>
+
+CSS가 여러개면 위에 있는 것이 제일 쎔!! 
+```
+
+```html
+부트스트랩에서..
+모서리 각지게 하기 : rounded-0
+모서리 둥글게 하기 : rounded-1 / rounded-2 ...
+```
+
+```html
+background에 이미지 넣기
+
+.background { 
+  background-image: url(../assets/apparel.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat; <!-- repeat하면 계속 나온다? -->
+  height: 700px;
+  margin-bottom: 20px
+}
 ```
 
 
