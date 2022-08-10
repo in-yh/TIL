@@ -118,7 +118,7 @@
    | 축이 이렇게 생김 1 main axis / 오른쪽 왼쪽이 cross axis
          
    나중에 부트스트랩에서는
-   clss="d-flex flex-row-reverse" 으로 명기
+   class="d-flex flex-row-reverse" 으로 명기
    ```
 
    ```html
