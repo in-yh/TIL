@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>throw</h1>
+    <form action='/articles/catch/' method='GET'> <!-- articles 앞에 / 넣기!! 그리고 마지막에도 / 넣기!!(.html이 아님!!) -->
+        <label for='throwmessage'>message : </label>
+        <input type='text' id='throwmessage' name='message'>
+        <input type='submit'>
+    </form>
+{% endblock content %}

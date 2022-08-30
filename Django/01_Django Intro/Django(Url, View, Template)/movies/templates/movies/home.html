@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>movies!</h1> {% comment %} 주소창에 movies/home 추가하기 {% endcomment %}
+  {{movie}}
+
+  {% for m in movie %}
+    <h2>{{m}}</h2>
+  {% endfor %}
+{% endblock content %}
