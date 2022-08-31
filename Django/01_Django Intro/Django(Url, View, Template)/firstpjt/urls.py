@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('articles/', include('articles.urls')), # 쉼표!!
     path('movies/', include('movies.urls')),
+    path('pages/', include('pages.urls')),
 ]

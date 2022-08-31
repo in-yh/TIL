@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>New</h1>
+    <form action='/articles/create' method='GET'>
+        <label for='title'>Title : </label>
+        <input type='text' id='title' name='title'><br> <!-- for와 id 연결하면 Title : 누르면 해당 박스에 커서 생김 -->
+        <label for='content'>Content : </label>
+        <input type='text' id='content' name='content'><br>
+        <input type='submit'>
+    </form>
+    {% comment %} 제출하면 ?title=제목&content=내용 으로 url 바뀜 (GET방식) {% endcomment %}
+    <a href='/articles'>뒤로가기</a> <!-- urls.py에서 index페이지 path를 공백으로 두었기에 -->
+{% endblock content %}
