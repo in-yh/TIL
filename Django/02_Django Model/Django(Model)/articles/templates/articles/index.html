@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Articles</h1>
-    <a href='/articles/new'>New로 가기</a>
+    <h1>Articles</h1> <!-- <h1 class="d-flex justify-content-center">articles</h1> 가운데 정렬 복습차.. -->
+    <a href='/articles/new' class="btn btn-primary">New로 가기</a>
     <hr>
     {% for article in articles %}
-        <p>{{article.pk}}</p> <!-- .pk로 호출해주네 -->
+        <a href="{% url 'articles:detail' article.pk %}"><h2>No. {{article.pk}}</h2></a> <!-- url view template 순으로 체크되는 듯? -->
+        <p>{{article.pk}}</p> <!-- .pk로 호출해주네 / 점 찍어서 점근 -->
         <p>{{article.title}}</p>
         <p>{{article.content}}</p>
         <hr>
     {% endfor %}
 {% endblock content %}
+
+{% comment %} 부트스트랩 카드 이용 {% endcomment %}
+{% comment %} {% for article in articles %}
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h4 class="card-text">No. {{article.pk}}</h4> 
+        <p class="card-text">{{article.title}}</p>
+        <p class="card-text">{{article.content}}</p>
+        <p class="card-text">{{article.created_at}}</p>
+        <p class="card-text">{{article.updated_at}}</p>
+        <a href="{% url 'articles:detail' article.pk %}" class='btn btn-primary'>{{article.pk}}</a> <!-- 보낼 때는 값으로 -->
+      </div>
+    </div>
+  {% endfor %} {% endcomment %}

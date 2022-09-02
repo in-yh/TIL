@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'articles', # 터미널 6개 이후 등록
-    'django_extensions', # 언더바!, 등록까지 해야 끝나는 경우가 있음
+    'django_extensions', # 언더바!, 등록까지 해야 끝나는 경우가 있음  # pip install ipython django-extensions / pip freeze > requirements.txt
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ article.pk }}번째 글</h2>
+    <hr>
+    <p>제목: {{ article.title }}</p>
+    <p>내용: {{ article.content }}</p>
+    <p>작성시간: {{ article.created_at }}</p>
+    <p>수정시간: {{ article.updated_at }}</p>
+    <a href="{% url 'articles:index' %}" class="btn btn-primary">go index</a>
+    <!-- DB에 영향을 미치기 때문에 POST 사용 -->
+    <form action="{% url 'articles:delete' article.pk %}" method="POST"> <!-- url view templates 순서로! delete할 때도 form 함수로! action에 url 지정함 -->
+        {% csrf_token %} <!-- 이거 넣으면 delete 제대로 작동함 -->
+        <input type="submit" value="delete">
+    </form>
+    <a href="{% url 'articles:edit' article.pk %}" class="btn btn-primary">edit</a>
+    {% comment %} <a href="{% url 'articles:delete' article.pk %}" class='btn btn-danger'>delete</a> {% endcomment %} 
+{% endblock content %}

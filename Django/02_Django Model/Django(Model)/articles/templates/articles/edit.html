@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>#{{article.pk}}'s edit</h2>
+    <form action='{% url 'articles:update' article.pk %}' method='POST'> 
+        {% csrf_token %}
+        <label for='title'>Title : </label>
+        <input type='text' id='title' name='title' value='{{article.title}}'><br>
+        <label for='content'>Content : </label>
+        <textarea name="content" id="content">{{article.content}}</textarea><br>
+        <!-- value 속성을 사용해 기존에 입력되어 있던 데이터를 출력 -->
+        <!-- textarea 태그는 value 속성이 없으므로 태그 내부 값으로 작성해야 함. -->
+        <input type='submit'>
+    </form>
+{% endblock content %}

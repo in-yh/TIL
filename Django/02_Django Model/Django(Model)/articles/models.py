@@ -1,6 +1,7 @@
 from django.db import models # django.db.models 모듈의 Model 클래스를 상속 받음
 
-# Create your models here.
+# 1. 모델 클래스 생성
+#   models.Model 상속
 class Article(models.Model):  # Model 클래스를 상속받음 # 하나의 테이블을 위해서는 하나의 클래스가 필요
     # 필드(컬럼)를 정의한다(게시판의 제목과 내용)
     # 클래스변수가 하나의 필드가 된다. 
@@ -38,3 +39,5 @@ class Article(models.Model):  # Model 클래스를 상속받음 # 하나의 테�
     # 번호를 쌓아나가는 이유는? 깃을 생각해보자. commit을 쌓아나가지. 변경사항을 쌓아나가. 왜 역사를 기록하기 위해. 언제 문제가 생길지 모르니. 그 과거로 돌아가야할 때도 있지.
 
     # 마지막에 migrate 해야해 꼭!!
+
+    # settings 등록하고 url 연결 전에 migrations , migrate 하기!
