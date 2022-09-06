@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %} <!-- 로드 해주고 -->
+
+{% block content %}
+  <h1>CREATE</h1>
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }} <!-- form으로 출력! 서버 껐다 켜주기, br과 textarea는 다름(.as_p하면 떨어짐, 각각의 태그를 p태그로 감싼다.) -->
+    {% comment %} <label for="title">Title: </label>
+    <input type="text" name="title" id="title"><br>
+    <label for="content">Content: </label>
+    <textarea name="content" id="content"></textarea><br> {% endcomment %}
+    <input type="submit">
+  </form>
+  <hr>
+  <a href="{% url 'articles:index' %}">뒤로가기</a>
+
+  <hr>
+  <h2>수동으로 FORM 작성</h2>
+  <form action="#">
+    <div>
+      {{ form.title.errors }}
+      {{ form.title.label_tag }}
+      {{ form.title }}
+    </div>
+    <div>
+      {{ form.content.errors }}
+      {{ form.content.label_tag }}
+      {{ form.content }}
+    </div>
+  </form>
+
+  <hr>
+  <h2>Looping over the form's fields</h2>
+  <form action="#">
+    {% for field in form %}
+      {{ field.errors }}
+      {{ field.label_tag }}
+      {{ field }}
+    {% endfor %}
+  </form>
+
+  <hr>
+  <h2>bootstrap v5 라이브러리 사용하기</h2>
+  <form action="#">
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
+  </form>
+
+{% endblock content %}
+
+{% comment %} textarea로 바꿔보기(라디오, 체크박스 등)
+  1. Form fields : 입력에 대한 유효성 검사 로직을 처리 (CharField와 같이)
+  2. Widgets : 단순히 HTML input 요소 렌더링을 담당 (유효성 검사 아니고 textarea로 바꿔줌, 중요한 아이가 아니여서 반드시 form fields에 할당됨)
+{% endcomment %}
