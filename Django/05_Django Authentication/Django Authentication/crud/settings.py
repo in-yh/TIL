@@ -60,10 +60,18 @@ TEMPLATES = [
         'DIRS': [BASE_DIR, 'templates',],
         'APP_DIRS': True,
         'OPTIONS': {
+            # 템플릿이 렌더링 될 때 호출 가능한 컨텍스트 데이터 목록
+            # 작성된 컨텍스트 데이터는 기본적으로 템플릿에서 사용 가능한 변수로 포함됨
+            # 즉, django에서 자주 사용하는 데이터 목록을 미리 템플릿에 로드해 둔 것
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
+                'django.contrib.auth.context_processors.auth', # 이거 덕분에 어떤 페이지에서도 user 정보 쓸 수 있음, base뿐만 아니라 모든 템플릿에서 사용 가능
+                # def auth(request):
+                #   ...
+                #   return {
+                #       "user" : user,        
+                #   }
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -106,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr' # 한글로 바꿔줌
 
 TIME_ZONE = 'UTC'
 
