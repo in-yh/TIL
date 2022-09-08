@@ -337,3 +337,17 @@
 1. PasswordChangeForm : 사용자가 비밀번호를 변경할 수 있도록 하는 Form
 2. 이전 비밀번호를 입력하여 비밀번호를 변경할 수 있도록 함
 3. 이전 비밀번호를 입력하지 않고 비밀번호를 설정할 수 있는 SetPasswordForm을 상속받는 서브 클래스?
+
+파. Limiting access to logged-in users
+
+1. 로그인 사용자에 대한 접근 제한하기(2가지 방법)
+
+   가) is_authenticated : User model의 속성 중 하나, 사용자가 인증 되었는지 여부를 알 수 있는 방법
+
+     1)request.user.is_authenticated
+
+     2)로그인이면 True, anonymousUser면 False
+
+     3)권한과는 관련 없으며, 사용자가 활성화 상태이거나 유효한 세션을 가지고 있는지도 확인하지 않음. 그냥 로그인이냐 비로그인이냐만 판단함.
+
+   나) login_required : decorator

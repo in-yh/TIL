@@ -8,20 +8,24 @@
 </head>
 <body>
   <div class="container">
-    <h3>{{ user }}</h3> <!-- 현재 로그인 되어있는 유저정보 출력하기 , 원래는 view에서 context를 설정해줘야 하는데.. , settings.py의 context.processors 설정 값 때문 -->
-    <!-- 현재 로그인한 사용자를 나타내는 User 클래스의 인스턴스가 템플릿 변수 user에 저장됨 -->
-    <!-- 인증이 되었으면 user, 인증이 안 되었으면 AnonymousUser로 출력됨 -->
-    <a href="{% url 'accounts:login' %}">Login</a> <!-- 항상 모든 페이지에 로그인 출력 -->
-    <form action="{% url 'accounts:logout' %}" method="POST"> <!-- login과 다르게 html이 없으므로 form태그로 받는다 / django-session DB에 영향을 주기 때문에 POST까지 작성 -->
-      {% csrf_token %}
-      <input type="submit" value="Logout">
-    </form>
-    <a href="{% url 'accounts:signup' %}">Signup</a> 
-    <form action="{% url 'accounts:delete' %}" method="POST"> 
-      {% csrf_token %}
-      <input type="submit" value="회원탈퇴">
-    </form>
-    <a href="{% url 'accounts:update' %}">회원정보수정</a> 
+    <!-- 분기한 건 출력만 했고 로직이 바뀌진 않음(비로그인 상태로도 URL을 직접 입력하면 게시글 작성 페이지로 갈 수 있음), 바꾸려면 view함수에서 -->
+    {% if request.user.is_authenticated %} <!-- settings.py의 context.processors 설정 값 때문  -->
+      <h3>{{ user }}</h3> <!-- 현재 로그인 되어있는 유저정보 출력하기 , 원래는 view에서 context를 설정해줘야 하는데.. , settings.py의 context.processors 설정 값 때문 -->
+      <!-- 현재 로그인한 사용자를 나타내는 User 클래스의 인스턴스가 템플릿 변수 user에 저장됨 -->
+      <!-- 인증이 되었으면 user, 인증이 안 되었으면 AnonymousUser로 출력됨 -->
+      <form action="{% url 'accounts:logout' %}" method="POST"> <!-- login과 다르게 html이 없으므로 form태그로 받는다 / django-session DB에 영향을 주기 때문에 POST까지 작성 -->
+        {% csrf_token %}
+        <input type="submit" value="Logout">
+      </form>
+      <form action="{% url 'accounts:delete' %}" method="POST"> 
+        {% csrf_token %}
+        <input type="submit" value="회원탈퇴">
+      </form>
+      <a href="{% url 'accounts:update' %}">회원정보수정</a> 
+    {% else %}
+      <a href="{% url 'accounts:login' %}">Login</a> <!-- 항상 모든 페이지에 로그인 출력 -->
+      <a href="{% url 'accounts:signup' %}">Signup</a> 
+    {% endif %}
     <hr>
     {% block content %}
     {% endblock content %}
