@@ -351,3 +351,13 @@
      3)권한과는 관련 없으며, 사용자가 활성화 상태이거나 유효한 세션을 가지고 있는지도 확인하지 않음. 그냥 로그인이냐 비로그인이냐만 판단함.
 
    나) login_required : decorator
+   
+     1)사용자가 로그인 되어 있으면 정상적으로 view함수를 실행
+   
+     2)로그인 하지 않은 사용자의 경우 settings.py의 LOGIN_URL 문자열 주소로 redirect
+   
+   ​    cf) LOGIN_URL의 기본값은 /accounts/login/
+   
+   ​         두번째 app이름을 accounts로 했던 이유 중 하나
+   
+   

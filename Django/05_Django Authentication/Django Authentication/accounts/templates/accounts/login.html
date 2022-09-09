@@ -2,7 +2,11 @@
 
 {% block content %}
     <h1>로그인</h1>
-    <form action="{% url 'accounts:login' %}" method="POST">
+    <!-- 아래 form은 views.login에서 가져온거니깐 거기로 감. -->
+    <!-- 일반적으로는 /accounts/login으로 보내나, -->
+    {% comment %} <form action="{% url 'accounts:login' %}" method="POST"> {% endcomment %}
+    <!-- next파라미터로 보내고 싶은 경우는 빈칸으로 둬야 함 / view에서 redirect 해줌 / uvt는 작성순서지 실행순서는 아닌듯 -->
+    <form action="" method="POST"> <!-- action을 비우면 주소창으로 감 --> 
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit">

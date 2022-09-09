@@ -2,7 +2,9 @@
 
 {% block content %}
   <h1>Articles</h1>
-  <a href="{% url 'articles:create' %}">CREATE</a>
+  {% if request.user.is_authenticated %} <!-- 인증된 사용자만 게시글 작성 링크를 볼 수 있도록 처리하기 -->
+    <a href="{% url 'articles:create' %}">CREATE</a> <!-- 근본적으로 막은 건 아님 , 비로그인상태로도 url 직접 입력하면 게시글 작성 페이지로 갈 수 있음 -->
+  {% endif %}
   <hr>
   {% for article in articles %}
     <p>글 번호 : {{ article.pk }}</p>

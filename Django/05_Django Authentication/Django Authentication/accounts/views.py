@@ -4,8 +4,21 @@ from django.contrib.auth import login as auth_login # init 파일에 있음. vie
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+# from .models import User
+
+
+# def index(request):
+#     users = User.objects.all()
+#     context = {
+#         'users' : users,
+#     }
+#     return render(request, 'accounts/index.html', context)
+
 
 def login(request): # 로그인 정보 입력할 함수와 인증할 함수, 총 2개 필요
+    if request.user.is_authenticated: # 인증된 사람이라면 로그인 로직을 수행할 수 없도록 처리
+        return redirect('articles:index') # login 접근하려해도 로그인상태라면 index로 돌려보냄
+
     # 페이지 GET, 인증 POST
     if request.method == "POST": # 로그인 시켜주는 코드
         form = AuthenticationForm(request, request.POST) # ModelForm일 때, request.POST였음. # 첫 번째 인자가 request!!, 두 번째가 data
@@ -13,9 +26,10 @@ def login(request): # 로그인 정보 입력할 함수와 인증할 함수, 총
         if form.is_valid():
             # 로그인은 save 아니고 session을 만듦 # 입력된 데이터 판단하여
             auth_login(request, form.get_user()) # request, 유저정보(AuthenticationForm이 제공하는 인스턴스 메서드, 유효성 검사를 통과했을 경우 로그인한 사용자 객체를 반환) # 현재 세션에 데이터 입력
-            # def get_user(self):
-            #   return self.user_cache
-            return redirect('articles:index') 
+            # # def get_user(self):
+            # #   return self.user_cache
+            # return redirect('articles:index') 
+            return redirect(request.GET.get('next') or 'articles:index') # 단축평가, 주소창에 next가 있으면 그 주소로 보냄 / html에서 action을 빈칸으로 둬야 잘 실행함(action을 한 곳으로 보내면 안 됨)
     else:
         # form 안 만들고 built-in form을 쓸거임.
         form = AuthenticationForm() # ModelForm이 아니라 Form임 (DB에 저장할 필요 없으니)
@@ -80,6 +94,7 @@ def change_password(request):
             # 비밀번호 변경하면 로그아웃이 됨(기존 세션과의 회원 인증 정보가 일치하지 않게 되어 버려 로그인 상태가 유지되지 못함)
             # 비밀번호 변경하면서 기존 세션을 업데이트 해주는 과정이 필요 (update_session_auth_hash(request, user))
             update_session_auth_hash(request, form.user) # 현재 요청과 새 세션 데이터가 파생될 업데이트된 사용자 객체를 가져오고, 세션 데이터 적절하게 업데이트해줌
+            # update_session_auth_hash(request, user) # 형식 : 요청, 유저정보
             return redirect('alticles:index')
     else:
         form = PasswordChangeForm(request.user) # 유저정보 적는거 필수! PasswordChangeForm은 SetPasswordForm를 상속받는데 저기서 필수인자로 해놔서..
