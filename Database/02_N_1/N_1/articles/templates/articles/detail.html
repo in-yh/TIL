@@ -4,12 +4,13 @@
   <h1>DETAIL</h1>
   <h2>{{ article.pk }}번째 글입니다.</h2>
   <hr>
+  {% comment %} READ, 게시글 작성자 출력 {% endcomment %}
   <p><b>작성자 : {{ article.user }}</b></p>
   <p>제목 : {{ article.title }}</p>
   <p>내용 : {{ article.content }}</p>
   <p>작성 시각 : {{ article.created_at }}</p>
   <p>수정 시각 : {{ article.updated_at }}</p>
-  {% if request.user == article.user %} {% comment %} 남의 글이라면 수정, 삭제 버튼 안 보이게 함 {% endcomment %}
+  {% if request.user == article.user %} {% comment %} 남의 글이라면 DELETE, UPDATE 버튼 안 보이게 함 {% endcomment %}
     <a href="{% url 'articles:update' article.pk %}">UPDATE</a>
     <form action="{% url 'articles:delete' article.pk %}" method="POST">
       {% csrf_token %}
@@ -23,14 +24,15 @@
   {% comment %} 댓글 개수 출력하기 {% endcomment %}
   {% comment %} 1. DTL filter - length 사용 {% endcomment %}
   {% comment %} 2. 쿼리셋 API - count() 사용 {% endcomment %}
+  {% comment %}   {{ comments.count }} {% endcomment %}
   {% if comments %}
     <p>{{ comments|length }}개의 댓글이 있습니다.</p>
   {% endif %}
   <ul>
     {% for comment in comments %}
       <li>
-        {{ comment.user }} - {{ comment.content }} {% comment %} 게시글 작성자 출력 {% endcomment %}
-        {% if request.user == comment.user %}
+        {{ comment.user }} - {{ comment.content }} {% comment %} READ, 게시글 작성자 및 내용 출력(조회) {% endcomment %}
+        {% if request.user == comment.user %} {% comment %} DELETE, 남의 글이라면 DELETE 버튼 안 보이게 함 {% endcomment %}
           <form action="{% url 'articles:comments_delete' article.pk comment.pk %}" method="POST">
             {% csrf_token %}
             <input type="submit" value="DELETE">
@@ -42,7 +44,8 @@
       <li>댓글이 없어요</li>
     {% endfor %}
   </ul>
-  {% if request.user.is_authenticated %} {% comment %} 인증된 사용자라면 {% endcomment %}
+  {% comment %} 인증된 사용자만 CommentForm 보게 하기 / detail은 비로그인된 상태로도 볼 수 있게 함수를 정의했기에 html에서 조정해줘야함 {% endcomment %}
+  {% if request.user.is_authenticated %} 
     <form action="{% url 'articles:comments_create' article.pk %}" method="POST"> 
       {% csrf_token %}
       {{ comment_form }}

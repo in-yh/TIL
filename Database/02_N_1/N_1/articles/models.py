@@ -3,9 +3,10 @@ from django.conf import settings # 추가!
 
 # Create your models here.
 class Article(models.Model):
+    # Article(N) - User(1)
     # 장고에서 User 모델을 참조하는 방법
-    # 1. settings.AUTH_USER_MODEL : 문자열로 리턴, models.py에서만 사용, models.py는 user를 창조하는 곳이기에..
-    # 2. get_user_model() : 객체를 줌, models.py 외 모든 곳에서 사용
+    # 1. settings.AUTH_USER_MODEL : 문자열('accounts.User')로 리턴, models.py에서만 사용, models.py는 user를 창조하는 곳이기에..
+    # 2. get_user_model() : 객체(User Object)를 줌, models.py 외 모든 곳에서 사용
     # migrations 해주기
     # 기존에 있던 데이터들에게는 비어있으니.. 여기서 넣어줄거니, 밖에서 넣어줄거니? / 어떤 것을 넣어줄거니?(넣어주면 '그 사용자'가 이전 게시물을 모두 작성했다 라는 의미가 됨)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -20,8 +21,10 @@ class Article(models.Model):
 
 # ctrl + shift + P -> python interpreter -> 가상환경 설정
 class Comment(models.Model):
+    # Comment(N) - Article(1)
     article = models.ForeignKey(Article, on_delete=models.CASCADE) # 위치 상관 없음(어차피 DB에 마지막에 추가됨) / ForeignKey() 클래스의 인스턴스 이름은 참조하는 모델 클래스 이름의 단수형(article)으로 작성 권장 / 데이터베이스 컬럼에 article_id로 만들어짐
     # related_name='comments' => migrate 다시 해야함 , 이거 사용하면 역참조시 comment_set 대신에 comments로 대체됨
+    # Comment(N) - User(1)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -77,7 +80,7 @@ class Comment(models.Model):
 #   나를 참조하는 테이블(나를 외래 키로 지정한)을 참조하는 것
 #   즉, 본인을 외래 키로 참조 중인 다른 테이블에 접근하는 것
 #   N:1 관계에서는 1이 N을 참조하는 상황(외래 키를 가지지 않은 1이 외래 키를 가진 N을 참조)
-# article.comment_set.method() # _set은 안바뀜
+# article.comment_set.method() # _set은 안바뀜 # Article 모델이 Comment 모델을 역참조할 때 사용하는 매니저
 # 컬럼에는 아무런 변화가 없으나 참조는 해야할 거 아녀, 그래서 manager를 이용해 역참조를 함
 # article.comment 형식으로는 댓글 객체를 참조할 수 없음(실제로 Article 클래스에는 Comment와의 어떠한 관계도 작성되어 있지 않음)
 # 반면 참조상황에서는 comment.article 형태로 작성 가능
@@ -90,4 +93,3 @@ class Comment(models.Model):
 # comments = article.comment_set.all()
 # for comment in comments:
 #   print(comment.content)
-
