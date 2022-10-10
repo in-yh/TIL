@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="fw-bold">NEW</h1>
+    <hr>
+    <form action="{% url 'movies:create' %}" method="POST"> <!-- 작성하고 submit 누르면 create로 전송됨 -->
+        {% csrf_token %} <!-- POST 방식이므로 반드시 작성!! -->
+        <label for="title">TITLE</label>
+        <input type="text" id="title" name="title"><br>
+        <label for="audience">AUDIENCE</label>
+        <input type="text" id="audience" name="audience"><br>
+        <label for="release_date">RELEASE_DATE</label>
+        <input type="date" id="release_date" name="release_date"><br> <!-- input type 중에 date가 딱 있더라.. good! -->
+        <label for="genre">GENRE</label>
+        <select id="genre" name="genre"> <!-- select가 있네 -->
+            <option value="코미디">코미디</option> <!-- value값으로 database에 저장되니 잘 설정해줘야 함. (처음에 1로 해주니 detail페이지에 1로 출력) -->
+        </select><br>
+        <label for="score">SCORE</label>
+        <input type="text" id="score" name="score"><br>
+        <label for="poster_url">POSTER_URL</label>
+        <input type="text" id="poster_url" name="poster_url"><br>
+        <label for="description">DESCRIPTION</label>
+        <textarea name="description" id="description"></textarea><br> <!-- textarea로 -->
+        <input type="submit" value="Submit"> <!-- type을 submit으로 해주면 알아서 버튼처럼 생김, value는 글씨를 바꿔주는 기능 -->
+        <hr>
+    </form>
+    <a href="{% url 'movies:index' %}">BACK</a> 
+{% endblock content %}

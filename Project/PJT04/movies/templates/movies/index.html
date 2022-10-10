@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="fw-bold">INDEX</h1> <!-- fontweight는 class에 담아서 작성(부트스트랩 이용) -->
+    <a href="{% url 'movies:new' %}">[NEW]</a> <!-- NEW페이지로 이동할 링크 -->
+    <hr>
+    {% for movie in movies %} <!-- 전체를 가져오기에 하나씩 보여주려면 for문 돌려줘야 함 -->
+        <p><a href="{% url 'movies:detail' movie.pk %}">{{movie.title}}</a></p> <!-- 영화 제목 클릭 시 detail.html로 이동, 이 때 detail은 pk라는 인자값이 필요하기에 뒤에 꼭 인자 붙여줘야 함. -->
+        <p>{{movie.score}}</p>
+        <hr>
+    {% endfor %}
+{% endblock content %}

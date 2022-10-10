@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="fw-bold">EDIT</h1>
+    <hr>
+    <form action="{% url 'movies:update' movie.pk %}" method="POST"> <!-- new처럼 edit은 정보를 입력받는 곳, create처럼 update가 받은 정보를 수정해주는 곳 -->
+        {% csrf_token %}
+        <label for="title">TITLE</label>
+        <input type="text" id="title" name="title" value="{{movie.title}}"><br> <!-- value를 넣어주면 edit.html 열면 value값으로 채워져 있음. 원래 있었던 값으로 넣어주고자 중괄호 2개 가져옴 -->
+        <label for="audience">AUDIENCE</label>
+        <input type="text" id="audience" name="audience" value="{{movie.audience}}"><br>
+        <label for="release_date">RELEASE_DATE</label>
+        <input type="date" id="release_date" name="release_date" value="{{movie.release_date|date:"Y-m-d"}}"><br> <!-- movie.release_date 이거만 넣으면 안 됨 -->
+        <label for="genre">GENRE</label>
+        <select id="genre" name="genre"> <!-- select 사용 -->
+            <option value="코미디">코미디</option>
+        </select><br>
+        <label for="score">SCORE</label>
+        <input type="text" id="score" name="score" value="{{movie.score}}"><br>
+        <label for="poster_url">POSTER_URL</label>
+        <input type="text" id="poster_url" name="poster_url" value="{{movie.poster_url}}"><br>
+        <label for="description">DESCRIPTION</label>
+        <textarea name="description" id="description">{{movie.description}}</textarea><br> <!-- textarea는 value를 안에 넣으면 안 되고 밖에 작성해줘야 함 -->
+        <input type="reset" value="Reset"> <!-- input type이 reset이면 초기 값으로 재설정해줌 -->
+        <input type="submit" value="Submit">
+        <hr>
+    </form>
+    <a href="{% url 'movies:detail' movie.pk %}">BACK</a> 
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1>UPDATE</h1>
+  <hr>
+  <form action="{% url 'movies:update' movie.pk %}" method="POST"> 
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %} {% comment %} 이 태그는 쓰나 안쓰나 보여지는 건 똑같음 {% endcomment %}
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="reset" class="btn btn-primary">Cancel</button> {% comment %} type을 reset으로! {% endcomment %}
+    {% endbuttons %}
+  </form>
+  <hr>
+  {% comment %} a 태그 안에 input이든 button이든 넣어줘야 작은 박스로 처리할 수 있음 이거 안하면 길게 한 줄로 늘어짐 {% endcomment %}
+  <a href="{% url 'movies:detail' movie.pk %}">
+    <button type="submit" class="btn btn-info">BACK</button> 
+  </a>
+{% endblock content %}

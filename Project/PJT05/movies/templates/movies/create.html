@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %} 
+{% comment %} bootstrap5 설치, 등록, 로드&사용법 숙지하기! {% endcomment %}
+
+{% block content %}
+  <h1>CREATE</h1>
+  <form action="{% url 'movies:create' %}" method="POST"> 
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
+  </form>
+  <hr>
+  <a href="{% url 'movies:index' %}"> 
+    {% buttons %}
+      <button type="submit" class="btn btn-info">BACK</button>
+    {% endbuttons %}
+  </a>
+{% endblock content %}

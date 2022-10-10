@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1 class="d-flex justify-content-center">Detail</h1>
+  <hr>
+  {% comment %} 가운데 정렬 위해 카드를 div태그 안에 넣어줌 {% endcomment %}
+  <div class="d-flex justify-content-center"> 
+    <div class="card" style="width: 20rem;">
+      <img src="{{ movie.poster_url }}" class="card-img-top" alt="no_image">
+      <div class="card-body">
+        <h5 class="card-title">{{ movie.title }}</h5>
+        <p class="card-text">Audience : {{ movie.audience }}</p>
+        <p class="card-text">Realese Dates : {{ movie.release_date }}</p>
+        <p class="card-text">Genre : {{ movie.genre }}</p>
+        <p class="card-text">Score : {{ movie.score }}</p>
+        <p class="card-text">{{ movie.description }}</p>
+        <div class="d-flex">
+          <div class="me-2">
+            <a href="{% url 'movies:update' movie.pk %}"> 
+              <input type="submit" value="UPDATE" class="btn btn-info">
+            </a>
+          </div>
+          <div class="mx-2">
+            <form action="{% url 'movies:delete' movie.pk %}" method="POST">
+              {% csrf_token %}
+              <input type="submit" value="DELETE" class="btn btn-danger">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% comment %} a 태그 안에 input이든 button이든 넣어줘야 작은 박스로 처리할 수 있음 이거 안하면 길게 한 줄로 늘어짐 {% endcomment %}
+  <a href="{% url 'movies:index' %}"> 
+    <button type="submit" class="btn btn-warning">BACK</button>
+    {% comment %} <input type="submit" value="BACK" class="btn btn-warning">  {% endcomment %}
+  </a>
+{% endblock content %}

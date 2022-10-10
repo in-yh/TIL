@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="fw-bold">DETAIL</h1>
+    <hr>
+    <div class="card p-0" style="width: 18rem;"> <!-- 이미지를 카드에 넣어봄, padding이 있길래 0으로 바꿔서 카드 안에 꽉 차게 만듦 -->
+        <img src="{{movie.poster_url}}" class="card-img-top" alt="no_image">    
+    </div>
+    <p class="fw-bold">{{movie.title}}</p> <!-- .title과 같이 데이터베이스에 접근할 때는 점+필드로 접근 -->
+    <p>Audience : {{movie.audience}}</p>
+    <p>Release Date : {{movie.release_date}}</p>
+    <p>Genre : {{movie.genre}}</p>
+    <p>Score : {{movie.score}}</p>
+    <p>{{movie.description}}</p>
+    <a href="{% url 'movies:edit' movie.pk %}">EDIT</a> <!-- EDIT링크 클릭시 edit으로 가게끔 함 -->
+    <form action="{% url 'movies:delete' movie.pk %}" method="POST"> <!-- DELETE 버튼 클릭 시 삭제 시킴 -->
+        {% csrf_token %}
+        <input type="submit" value="DELETE">
+    </form>
+    <a href="{% url 'movies:index' %}">Back</a> <!-- 뒤로가기로 index.html로 이동하는 링크 표시 -->
+{% endblock content %}
