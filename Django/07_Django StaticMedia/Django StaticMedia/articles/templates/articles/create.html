@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>CREATE</h1>
+  <form action="{% url 'articles:create' %}" method="POST" enctype="multipart/form-data"> 
+    {% comment %} 파일 전송위해 enctype="multipart/form-data" 추가 {% endcomment %}
+    {% comment %}   파일/이미지 업로드 시 반드시 사용 {% endcomment %}
+    {% comment %}   전송되는 데이터의 형식 지정 {% endcomment %}
+    {% comment %} url도 작성해야함 {% endcomment %}
+    {% comment %} view.py에도 request.FILES 추가해줘야 함 {% endcomment %}
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+  </form>
+  <hr>
+  <a href="{% url 'articles:index' %}">[back]</a>
+{% endblock content %}
