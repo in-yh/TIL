@@ -1,0 +1,35 @@
+[
+{
+    "model": "articles.comment",
+    "pk": 1,
+    "fields": {
+        "article": 1,
+        "user": 2,
+        "content": "댓글 달았음",
+        "created_at": "2022-10-12T07:00:51.219Z",
+        "updated_at": "2022-10-12T07:00:51.219Z"
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 2,
+    "fields": {
+        "article": 2,
+        "user": 1,
+        "content": "good!",
+        "created_at": "2022-10-12T07:01:42.325Z",
+        "updated_at": "2022-10-12T07:01:42.325Z"
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 3,
+    "fields": {
+        "article": 3,
+        "user": 1,
+        "content": "아트는 예술!",
+        "created_at": "2022-10-12T07:01:52.928Z",
+        "updated_at": "2022-10-12T07:01:52.928Z"
+    }
+}
+]

@@ -1,0 +1,44 @@
+[
+{
+    "model": "articles.article",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "title": "Á¦¸ñ",
+        "content": "³»¿ë",
+        "created_at": "2022-10-12T04:52:26.319Z",
+        "updated_at": "2022-10-12T04:52:26.319Z",
+        "like_users": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 2,
+    "fields": {
+        "user": 2,
+        "title": "Àç¿õÀç¿õ",
+        "content": "Àç¿õÀç¿õÀ×¤·¤·¤·¤·¤·",
+        "created_at": "2022-10-12T07:00:17.020Z",
+        "updated_at": "2022-10-12T07:00:17.020Z",
+        "like_users": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 3,
+    "fields": {
+        "user": 2,
+        "title": "ÀÎÅÍ¹Ì¼Ç",
+        "content": "¹Â~ÁöÄÃ",
+        "created_at": "2022-10-12T07:00:36.734Z",
+        "updated_at": "2022-10-12T07:00:36.734Z",
+        "like_users": []
+    }
+}
+]
