@@ -15,7 +15,7 @@ class Article(models.Model):
     # user.article_set 여기서 충돌 => like_articles로 바꾸자!
     
     # article.user : 게시글을 작성한 유저 N:1
-    # user.article_set : 유저가 작성한 게시글(역참조) N:1
+    # user.article_set : 유저가 작성한 게시글들(역참조) N:1
     # article.like_users : 게시글을 좋아요한 유저 M:N
     # user.like_articles : 유저가 좋아요한 게시글(역참조) M:N
     title = models.CharField(max_length=10)

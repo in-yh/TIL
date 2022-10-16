@@ -12,8 +12,8 @@ class Doctor(models.Model):
 class Patient(models.Model):
     # doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     # 다대다필드로 가져옴 (데이터베이스 초기화 후 마이그레이션)
-    doctors = models.ManyToManyField(Doctor, related_name='patients', through='Reservation') # symmetrical : 대칭, ManyToManyField가 동일한 모델을 가리키는 정의에서만 사용, True면 한쪽에서 추가하면 다른쪽에서도 추가됨, False면 팔로우의 개념(User-User)
-    # 알아서 중개 테이블을 가져옴 (patient_doctors)
+    doctors = models.ManyToManyField(Doctor, related_name='patients', through='Reservation') # symmetrical : 대칭, ManyToManyField가 동일한 모델(on self)을 가리키는 정의에서만 사용(friends = models.ManyToManyField('self', symmetrical=False)), True면 한쪽에서 추가하면 다른쪽에서도 추가됨, False면 팔로우의 개념(User-User)
+    # 알아서(자동으로) 중개 테이블을 가져옴 (patient_doctors)
     # Doctor에 작성해도 상관없음(비종속적인 관계) 참조랑 역참조 관계만 달라질뿐
     # Patient에서 Doctor를 참조할 때는 참조, 그 반대는 역참조
     # 의사와 환자가 예약을 만들어내게끔 함 (Reservation과는 다름)

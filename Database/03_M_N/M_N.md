@@ -1,6 +1,6 @@
 * Many to many relationship
-* M:N(Article-User)
-* M:N(User-User)
+* M:N(Article-User) Like
+* M:N(User-User) Follow
 
 
 
