@@ -22,3 +22,8 @@ class Comment(models.Model):
 #   4. 준비된 fixtures 데이터 load (python manage.py loaddata articles.json)
 #   5. DFR 설치, 등록 및 패키지 목록 업데이트 (pip install djangorestframework / 'rest_framework',)
  
+# Django REST framework - N:1 Relation
+# 사전 준비
+#   1. 모델 추가 및 설계도(숫자), 데이터베이스 초기화
+#   2. migration 진행
+#   3. 준비된 fixtures 데이터 load (python manage.py loaddata articles.json comments.json)

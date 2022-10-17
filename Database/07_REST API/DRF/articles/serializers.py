@@ -33,13 +33,16 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
-        read_only_fields = ('article',)
+        read_only_fields = ('article',) # 외래 키 필드를 '읽기 전용 필드'로 설정
 
-class ArticleSerializer(serializers.ModelSerializer): # detail 작성 위해 단일로 다시 작성
+# detail 작성 위해 단일로 다시 작성
+class ArticleSerializer(serializers.ModelSerializer): 
+    # 1. 특정 게시글에 작성된 댓글 목록 출력하기
     # comment_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     # comment_set이 N이라 쿼리셋을 참조(없어도 빈 리스트)
     comment_set = CommentSerializer(many=True, read_only=True)
     # pk뿐만 아니라 모든 정보를 보여줌
+    # 2. 특정 게시글에 작성된 댓글의 개수 출력하기
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True) # article.comment_set.count() / 보여지긴 해야하나 유효성검사는 통과해야하니(원래 필드가 아니라서 밑에 쓰면 작동 안 함)
 
     class Meta:

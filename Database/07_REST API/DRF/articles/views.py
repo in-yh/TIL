@@ -8,7 +8,7 @@ from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerial
 from .models import Article, Comment
 
 # 목록 조회생성
-@api_view(['GET', 'POST']) # DRF에서는 필수로 해줘야함, GET 아니면 405 응답
+@api_view(['GET', 'POST']) # DRF에서는 필수로 해줘야함, 기본은 GET(GET 아니면 405 응답)
 def articles_list(request):
     if request.method == 'GET':
         # articles = Article.objects.all() 
@@ -18,13 +18,13 @@ def articles_list(request):
     
     elif request.method == 'POST':
         serializer = ArticleSerializer(data=request.data) # 출력되는 필드만 다름
-        if serializer.is_valid(raise_exception=True): # raise_exception 쓰면 아래줄 안써도 됨
+        if serializer.is_valid(raise_exception=True): # raise_exception 쓰면 아래줄 안써도 됨, 유효하지 않은 데이터에 대해 예외 발생시키기, 기본적으로 400 응답
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED) # 201(잘 생성되었다.) 리턴 
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) # 400 리턴
 
 # 단일 조회수정삭제
-@api_view(['GET', 'DELETE', 'PUT']) # DRF에서는 필수로 해줘야함, GET 아니면 405 응답
+@api_view(['GET', 'DELETE', 'PUT'])
 def article_detail(request, article_pk):
     # article = Article.objects.get(pk=article_pk) # 페이지 못 찾으면 404를 줘야하기에.. get_object_or_404() # all()은 get_list_or_404()로 바꿔줌
     article = get_object_or_404(Article, pk=article_pk)
