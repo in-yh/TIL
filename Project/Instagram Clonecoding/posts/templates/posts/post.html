@@ -1,0 +1,17 @@
+{% for post in posts %}
+  <div class="card w-50">
+    {% comment %} 이미지 없을 때도 있으니 조건문 넣어줘야 함 {% endcomment %}
+    {% if post.image %} 
+      <img src="{{ post.image.url }}" class="card-img-top" alt="no-image">
+    {% endif %}
+    {% comment %} card-body에서 빼주면 이미지 꽉차게 들어감 {% endcomment %}
+    <div class="card-body">
+      <p class="card-text">{{ post.content }}</p>
+      <a href="{% url 'posts:update' post.pk %}" class="btn btn-info">Edit</a>
+      <form action="{% url 'posts:delete' post.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+{% endfor %}

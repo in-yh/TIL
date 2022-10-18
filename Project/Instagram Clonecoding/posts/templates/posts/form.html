@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1>New Post</h1>
+  {% comment %} post가 있다면 (이게 중요!) {% endcomment %}
+  {% if post %} 
+  {% comment %} update {% endcomment %}
+    <form action="{% url 'posts:update' post.pk %}" method="POST" enctype="multipart/form-data">
+  {% else %}
+  {% comment %} create {% endcomment %}
+    <form action="{% url 'posts:create' %}" method="POST" enctype="multipart/form-data">
+  {% endif %}
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      {% endbuttons %}
+    </form>
+{% endblock content %}
