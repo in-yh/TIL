@@ -19,7 +19,8 @@
 //   return `Hi ${name}`  
 // }
 
-// console.log(greeting())
+// console.log(greeting()) // Hi Anonymous
+
 // 매개변수보다 인자의 개수가 많아도 적어도 출력 됨
 
 // Spread syntax(...)
