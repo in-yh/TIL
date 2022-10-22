@@ -86,6 +86,8 @@ console.log(numbers)
 numbers.pop()
 console.log(numbers)
 
+// unshift & shift : 배열의 가장 앞에 요소를 추가 또는 제거
+
 console.log(numbers.includes(1)) // 특정값이 존재하는지 판별 후 반환
 console.log(numbers.includes(100))
 
