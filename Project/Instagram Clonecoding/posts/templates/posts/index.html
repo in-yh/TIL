@@ -2,6 +2,15 @@
 {% load bootstrap5 %}
 
 {% block content %}
+  {% comment %} base.html 대신 index.html에 작성(그래야 delete.html 상단에 이름과 로그아웃 버튼 생기지 않아) {% endcomment %}
+  {% comment %} 로그인 성공 전후 상태를 상단에 표시 {% endcomment %}
+  {% if user.is_authenticated %}
+  {% else %}
+    {% comment %} 로그인, 회원가입 {% endcomment %}
+    <a href="{% url 'accounts:login' %}"><button type="submit" class="btn btn-primary">로그인</button></a>
+    <a href="{% url 'accounts:signup' %}"><button type="submit" class="btn btn-success">회원가입</button></a>
+  {% endif %}
+
   {% include 'posts/post.html' %}
    {% comment %} 주소 명시할 때 posts폴더 안에 있다는 것도 명시해줘야 함 {% endcomment %}
 {% endblock content %}

@@ -19,7 +19,9 @@ def create(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES) # 두번째 인자는 이미지 파일
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False) # models.py에서 user 만들고 해줘야 함!
+            post.user = request.user
+            post.save()
         return redirect('posts:index')
     else:
         form = PostForm()

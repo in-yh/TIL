@@ -1,9 +1,11 @@
 from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import Thumbnail
+from django.conf import settings
 
 # Create your models here.
 class Post(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) # Post와 User 연결하고자
     content = models.TextField()
     image = models.ImageField(blank=True)
     image_thumnail = ImageSpecField(

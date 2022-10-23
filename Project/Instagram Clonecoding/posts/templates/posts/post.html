@@ -7,6 +7,8 @@
     {% comment %} card-body에서 빼주면 이미지 꽉차게 들어감 {% endcomment %}
     <div class="card-body">
       <p class="card-text">{{ post.content }}</p>
+      {% comment %} post와 user 연결하고자 외래키 사용 후 참조 사용 {% endcomment %}
+      <p class="card-text">작성자 : <a href="{% url 'accounts:profile' post.user.username %}">{{ post.user.username }}</a></p>
       <a href="{% url 'posts:update' post.pk %}" class="btn btn-info">Edit</a>
       <form action="{% url 'posts:delete' post.pk %}" method="POST">
         {% csrf_token %}

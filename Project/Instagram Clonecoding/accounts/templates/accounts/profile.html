@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+    {% comment %} 사용자 본인의 프로필에 접속한 경우와 다른 사람의 프로필에 접속한 경우를 분리합니다. {% endcomment %}
+    {% comment %} request.user는 현재 로그인된 사람, person은 어떤 사람의 프로필 눌렀을 때의 객체 {% endcomment %}
+    {% if request.user == person %}
+        <h1>환영합니다! {{ request.user }}</h1>
+        {% for profile in profiles %}
+            {% if profile.image_file %} {% comment %} 각각의 정보가 있을 때만 출력되게 함 {% endcomment %}
+                <img src="{{ profile.image_thumbnail.url }}" alt="{{ profile.image_thumbnail }}">
+                {% comment %} views.py에서 request.POST하면서 request.FILES 같이 받고 {% endcomment %}
+                {% comment %} templates에서 enctype="multipart/form-data" 추가 {% endcomment %}
+                {% comment %} img 태그 안에 객체의 image필드 혹은 image_thumbnail 필드를 url로 받아오기 {% endcomment %}
+            {% endif %}
+            {% if profile.nickname %}
+                <p>닉네임 : {{ profile.nickname }}</p>
+            {% endif %}
+            {% if profile.introduction %}
+                <p>자기소개 : {{ profile.introduction }}</p>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <h1>{{ person }} 님의 프로필</h1>
+    {% endif %}
+    
+
+    {% if user.is_authenticated %}
+    <div class="row"> {% comment %} 한 줄로 만들고 {% endcomment %}
+      <div class="d-flex justify-content-start"> {% comment %} 배열하기 {% endcomment %}
+        {% comment %} 로그아웃 {% endcomment %}
+        <form action="{% url 'accounts:logout' %}" method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-secondary">로그아웃</button>
+        </form> 
+        {% comment %} 회원정보 수정 (update에서 profile_update로 바꿈) (인자는 현재 user의 pk값) {% endcomment %}
+        <a href="{% url 'accounts:profile_update' user.pk %}"><button type="submit" class="btn btn-warning">프로필 수정</button></a>
+        {% comment %} 비밀번호 변경 {% endcomment %}
+        <a href="{% url 'accounts:change_password' %}"><button type="submit" class="btn btn-primary">비밀번호 변경</button></a>
+        {% comment %} 회원탈퇴 버튼 추가(누르면 확인과정을 보여줘야 하므로 GET방식으로 먼저 보내고, 이후 확인과정 버튼에서 POST방식으로 보낸다.) {% endcomment %}
+        <form action="{% url 'accounts:delete' %}" method="GET"> 
+          <button type="submit" class="btn btn-danger">회원 탈퇴</button>
+        </form>
+      </div>
+    </div>
+    {% endif %}
+
+{% endblock content %}
