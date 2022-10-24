@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .red { 
+      color: red;
+    }
+    .blue {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="red">안녕하세요</h1>
+  <div></div>
+
+  <script>
+    const aTag = document.createElement('a')
+    aTag.setAttribute('href', 'https://google.com')
+    aTag.innerText = '구글'
+
+    // div태그 먼저 선택해줘야 함
+    const divTag = document.querySelector('div')
+    divTag.appendChild(aTag)
+
+    // h1Tag.classList // DOMTokenList ['red', value: 'red']
+    const h1Tag = document.querySelector('h1')
+    h1Tag.classList.toggle('blue')
+    // h1Tag.classList // DOMTokenList(2) ['red', 'blue', value: 'red blue']
+    h1Tag.classList.toggle('blue')
+    // h1Tag.classList // DOMTokenList ['red', value: 'red']
+    // 클래스가 존재한다면 제거하고 false를 반환,
+    // 존재하지 않으면 클래스를 추가하고 true를 반환
+  </script>
+</body>
+</html>

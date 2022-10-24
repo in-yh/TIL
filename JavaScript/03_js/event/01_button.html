@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">버튼</button>
+  <p id="counter">0</p>
+  
+  <script>
+    // 버튼을 누르면 숫자 증가하게끔.. 그럴려면 선택을 먼저 해야함!!
+    const btn = document.querySelector('#btn')
+    // console.log(btn) // <button id="btn">버튼</button>
+    let countNum = 0 // innerText 채워야 하므로 초기값 설정
+
+    // 이벤트 핸들러 작성
+    btn.addEventListener('click', function (event) {
+      // console.log(event)
+      const pTag = document.querySelector('#counter')
+
+      countNum += 1
+
+      pTag.innerText = countNum
+    })
+    // 이벤트 대상인 btn이 있고, 그 btn을 클릭하면 이벤트 발생
+    // 콜백 함수 인자는 event밖에 없음 (클릭을 하면 무슨 일을 하겠다!가 콜백함수가 하는 것임)
+    // 페이지 변화 없이 클릭할 때마다 변경!!
+  </script>
+</body>
+</html>

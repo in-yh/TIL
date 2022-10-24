@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1 id="title">DOM 조작</h1>
+  <p class="text">querySelector</p>
+  <p class="text">querySelectorAll</p>
+  <ul>
+    <li>Javascript</li>
+    <li>Python</li>
+  </ul>
+  <p>
+
+  </p>
+  <a href=""></a>
+
+  <script>
+    console.log(document.querySelector('#title'))
+    // id는 #이었지..
+    // alt + b 후, 개발자도구 console에서 확인하기
+    // 1개 선택
+    console.log(document.querySelectorAll('.text'))
+    // 여러 개 선택
+    // NodeList로 표현
+    console.log(document.querySelector('.text'))
+    // 매칭되는 첫 번째를 가져옴
+
+    // document.querySelectorAll('ul > li')
+    // ul 태그의 자식 태그를 선택해도 되고
+    console.log(document.querySelectorAll('body > ul > li'))
+    // Elements에서 li 태그 위에 우클릭 -> copy -> copy select -> 여기에 복사
+    
+    // NodeList
+    // index로만 각 항목에 접근 가능
+    // 배열의 forEach메서드 및 다양한 배열 메서드 사용 가능
+    // querySelectorAll()에 의해 반환되는 NodeList는 DOM의 변경사항을 실시간으로 반영하지 않음
+    // 실시간으로 반영되는 타입도 있는데, MDN에서 NodeList와 같이 설명되어 있는 거..(mdn nodelist 검색)
+    // NodeList 정적 컬렉션일 때만 실시간 반영하지 않아. querySelectorAll 같이
+    liTags = document.querySelectorAll('body > ul > li')
+
+    liTags.forEach(element => {
+      console.log(element)
+    })
+
+  </script>
+</body>
+</html>
