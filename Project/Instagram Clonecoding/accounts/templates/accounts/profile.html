@@ -19,30 +19,32 @@
             {% if profile.introduction %}
                 <p>자기소개 : {{ profile.introduction }}</p>
             {% endif %}
+
+            {% if user.is_authenticated %}
+            <div class="row"> {% comment %} 한 줄로 만들고 {% endcomment %}
+              <div class="d-flex justify-content-start"> {% comment %} 배열하기 {% endcomment %}
+                {% comment %} 로그아웃 {% endcomment %}
+                <form action="{% url 'accounts:logout' %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-secondary">로그아웃</button>
+                </form> 
+                {% comment %} 회원정보 수정 (update에서 profile_update로 바꿈) (인자를 profile.pk로 넣어줘야 하기에 for문 안으로 들여보냄) {% endcomment %}
+                <a href="{% url 'accounts:profile_update' profile.pk %}"><button type="submit" class="btn btn-warning">프로필 수정</button></a>
+                {% comment %} 비밀번호 변경 {% endcomment %}
+                <a href="{% url 'accounts:change_password' %}"><button type="submit" class="btn btn-primary">비밀번호 변경</button></a>
+                {% comment %} 회원탈퇴 버튼 추가(누르면 확인과정을 보여줘야 하므로 GET방식으로 먼저 보내고, 이후 확인과정 버튼에서 POST방식으로 보낸다.) {% endcomment %}
+                <form action="{% url 'accounts:delete' %}" method="GET"> 
+                  <button type="submit" class="btn btn-danger">회원 탈퇴</button>
+                </form>
+              </div>
+            </div>
+            {% endif %}
+
         {% endfor %}
     {% else %}
         <h1>{{ person }} 님의 프로필</h1>
     {% endif %}
     
 
-    {% if user.is_authenticated %}
-    <div class="row"> {% comment %} 한 줄로 만들고 {% endcomment %}
-      <div class="d-flex justify-content-start"> {% comment %} 배열하기 {% endcomment %}
-        {% comment %} 로그아웃 {% endcomment %}
-        <form action="{% url 'accounts:logout' %}" method="POST">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-secondary">로그아웃</button>
-        </form> 
-        {% comment %} 회원정보 수정 (update에서 profile_update로 바꿈) (인자는 현재 user의 pk값) {% endcomment %}
-        <a href="{% url 'accounts:profile_update' user.pk %}"><button type="submit" class="btn btn-warning">프로필 수정</button></a>
-        {% comment %} 비밀번호 변경 {% endcomment %}
-        <a href="{% url 'accounts:change_password' %}"><button type="submit" class="btn btn-primary">비밀번호 변경</button></a>
-        {% comment %} 회원탈퇴 버튼 추가(누르면 확인과정을 보여줘야 하므로 GET방식으로 먼저 보내고, 이후 확인과정 버튼에서 POST방식으로 보낸다.) {% endcomment %}
-        <form action="{% url 'accounts:delete' %}" method="GET"> 
-          <button type="submit" class="btn btn-danger">회원 탈퇴</button>
-        </form>
-      </div>
-    </div>
-    {% endif %}
 
 {% endblock content %}

@@ -104,23 +104,18 @@ def profile(request, username):
     }
     return render(request, 'accounts/profile.html', context)
 
-def profile_update(request, user_pk):
-    User = get_user_model()
-    person = User.objects.get(pk=user_pk) # 어떤 유저인지 알아야 해, user_pk는 url로 넘어온 것
-    # 이 부분부터 다시..
-    profile = Profile.objects.get(user=user_pk) # Profile 클래스 내 user 필드가 위에서 정의한 person인 profile 가져오기
+def profile_update(request, profile_pk):
+    profile = Profile.objects.get(pk=profile_pk) # profile 가져오기
     if request.method == 'POST':
-        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile) # 이전 정보로 profile 넣어주기(person은 User 클래스로 필드가 다름)
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile) # 이전 정보로 profile 넣어주기
         if form.is_valid():
-            profile = form.save(commit=False) # profile에는 현재 user 정보가 비어있다
-            profile.user = request.user # user 정보는 여기서 저장해줘야 해
-            profile.save() # 저장해주고
-            return redirect('accounts:profile', person.username) # profile 보낼 때는 username을 인자로 보내야하므로 username은 User필드에 있음
+            form.save() # user정보는 이미 고정이기에 다시 저장해줄 필요 없음
+            return redirect('accounts:profile', profile.user.username) # profile 보낼 때는 username을 인자로 보내야하므로 username은 User필드에 있음
     else:
         form = ProfileUpdateForm(instance=profile)
     context = {
         'form': form,
-        'person': person, # render로 보낼 때 인자가 필요하다면 context에 명시해준다고 생각해야 함
+        'profile': profile, # render로 보낼 때 인자가 필요하다면 context에 명시해준다고 생각해야 함
     }
     return render(request, 'accounts/profile_update.html', context)
 
