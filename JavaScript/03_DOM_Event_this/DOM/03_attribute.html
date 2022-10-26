@@ -19,15 +19,17 @@
   <div></div>
 
   <script>
+    // aTag 생성 및 컨텐츠 추가
     const aTag = document.createElement('a')
-    aTag.setAttribute('href', 'https://google.com')
     aTag.innerText = '구글'
+    // a 태그의 href 속성 추가
+    aTag.setAttribute('href', 'https://google.com')
 
-    // div태그 먼저 선택해줘야 함
+    // div태그 먼저 선택해줘야 함, 자식태그로 aTag 추가
     const divTag = document.querySelector('div')
     divTag.appendChild(aTag)
 
-    // h1Tag.classList // DOMTokenList ['red', value: 'red']
+    // h1Tag.classList // DOMTokenList ['red', value: 'red'] // 클래스 목록 조회
     const h1Tag = document.querySelector('h1')
     h1Tag.classList.toggle('blue')
     // h1Tag.classList // DOMTokenList(2) ['red', 'blue', value: 'red blue']

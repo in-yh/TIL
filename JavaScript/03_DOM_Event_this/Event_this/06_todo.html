@@ -17,11 +17,11 @@
     const formTag = document.querySelector('form')
     formTag.addEventListener('submit', function (event) {
       // console.log(event)
-      event.preventDefault() // evemt를 막아줌
+      event.preventDefault() // event를 막아줌, 막지 않으면 form태그 특성상 바로 데이터 전달
 
       const inputTag = document.querySelector('.inputData')
       const data = inputTag.value
-      console.log(data)
+      // console.log(data)
 
       if (data.trim()) { 
         const liTag = document.createElement('li')
@@ -30,11 +30,11 @@
         const ulTag = document.querySelector('ul')
         ulTag.appendChild(liTag)
   
-        event.target.reset() // 완료되면 인풋 초기화
+        event.target.reset() // 완료되면 인풋 초기화, form에서만 가능
       } else {
         alert('내용 입력하세요!') // 빈값이면 출력되게 함
       }
-    })
+    })    
   </script>
 </body>
 </html>

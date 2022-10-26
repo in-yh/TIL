@@ -19,10 +19,11 @@
     // 이벤트 핸들러 작성
     btn.addEventListener('click', function (event) {
       // console.log(event)
-      const pTag = document.querySelector('#counter')
-
+      
       countNum += 1
-
+      
+      // pTag 선택 후 거기에 내용을 변경시킨다.
+      const pTag = document.querySelector('#counter')
       pTag.innerText = countNum
     })
     // 이벤트 대상인 btn이 있고, 그 btn을 클릭하면 이벤트 발생
