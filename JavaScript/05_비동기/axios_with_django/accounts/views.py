@@ -120,6 +120,7 @@ def follow(request, user_pk):
         if me != you:
             if you.followers.filter(pk=me.pk).exists():
                 you.followers.remove(me)
+                # 팔로우 여부를 확인하기 위한 is_followed 변수 작성 및 JSON 응답
                 is_followed = False
             else:
                 you.followers.add(me)

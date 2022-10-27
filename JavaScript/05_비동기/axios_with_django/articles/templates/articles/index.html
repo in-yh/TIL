@@ -29,21 +29,25 @@
 {% endblock content %}
 
 {% block script %}
+  {% comment %} axios CDN 작성 {% endcomment %}
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
+    // form 요소 선택을 위해 class 속성 지정(위에서) 및 선택
     const forms = document.querySelectorAll('.like-forms')
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 
-    forms.forEach((form) => {
-      form.addEventListener('submit', function (event) {
-        event.preventDefault()
+    forms.forEach((form) => { // index 페이지 각 게시글에 좋아요 버튼이 있기에 forEach문 돌리기
+      form.addEventListener('submit', function (event) { // form을 submit시
+        event.preventDefault() // 제출 막고
         // onsole.log(event.target.dataset)
 
         const articleId = event.target.dataset.articleId
 
         axios({
           method: 'post',
+          // 1. url
           url: `http://127.0.0.1:8000/articles/${articleId}/likes/`,
+          // 2. csrftoken
           headers: {'X-CSRFToken': csrftoken},
         })
           .then((response) => {

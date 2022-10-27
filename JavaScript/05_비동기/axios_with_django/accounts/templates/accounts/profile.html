@@ -3,6 +3,7 @@
 {% block content %}
   <h1>{{ person.username }}님의 프로필</h1>
   <div>
+    {% comment %} 선택할 수 있도록 id 추가 {% endcomment %}
     팔로워 : <span id="followers-count">{{ person.followers.all|length }}</span> / 팔로잉 : <span id="followings-count">{{ person.followings.all|length }}</span>
   </div>
 
@@ -43,20 +44,30 @@
 {% endblock content %}
   
 {% block script %}
+  {% comment %} axios CDN 작성 {% endcomment %} 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
+    // form 요소 선택을 위해 id 속성 지정(위에서) 및 선택
     const form = document.querySelector('#follow-form')
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
     
+    // form을 submit시
     form.addEventListener('submit', function (event) {
+      // 제출 막고
       event.preventDefault()
       // console.log(event.target.dataset)
       
       const userId = event.target.dataset.userId
     
+      // 현재 axios로 POST 요청을 보내기 위해 필요한 것
       axios({
         method: 'post',
+        // 1. url에 작성할 user pk는 어떻게 작성해야 할까?
+        //  data-user-id="{{ person.pk }}"
+        //  const userId = event.target.dataset.userId // 모든 사용자 지정 데이터는 dataset 속성을 통해 사용할 수 있음
         url: `/accounts/${userId}/follow/`,
+        // 2. csrftoken은 어떻게 보내야 할까?
+        //  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
         headers: {'X-CSRFToken': csrftoken,}
       })
         .then((response) => {
