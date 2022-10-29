@@ -1,0 +1,91 @@
+<!-- 버튼을 눌러서 숫자를 + - -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        margin-left: 5px;
+        margin-top: 15px;
+      }
+
+      .red {
+        background-color: #fa1807;
+      }
+
+      .blue {
+        background-color: #160eed;
+      }
+      
+      .green {
+        background-color: #0ced6a;
+      }
+    </style>
+  </head>
+  <body>
+    <div id=number>0</div>
+    <button id="minus">-</button>
+    <button id="plus">+</button>
+    
+    <div>
+      <p class="current-color"></p>
+      <div class="red box"></div>
+      <div class="blue box"></div>
+      <div class="green box"></div>
+    </div>
+    <script>
+      let number = document.querySelector('#number') // number를 바꿀 것이기 때문에
+
+      const minusBtn = document.querySelector('#minus')
+      minusBtn.addEventListener('click', function (event) {
+        number.innerText-- // number.innerText 문자열이나 -- 연산을 쓰면 가능하군
+        // number.innerText = parseInt(number.innerText) - 1
+        // cnt = cnt + 1
+      })
+
+      const plusBtn = document.querySelector('#plus')
+      plusBtn.addEventListener('click', function (event) {
+        number.innerText++
+        // number.innerText = parseInt(number.innerText) + 1
+      })
+
+      // let currentColor = document.querySelector('.current-color')
+
+      changeColor = function (color) {
+        const currentColor = document.querySelector('.current-color')
+        currentColor.innerText = color
+        currentColor.style.color = color
+      }
+
+      const red = document.querySelector('.red')
+        .addEventListener('click', function (event) { // 선언과 동시에 이벤트리스너 추가
+          number.style.color = '#fa1807' // number의 style의 color를 red값으로 바꾸기
+          // currentColor.innerText = 'red'
+          // currentColor.style.color = '#fa1807'
+          changeColor('red')
+        })
+
+      const blue = document.querySelector('.blue')
+        .addEventListener('click', function (event) { // 선언과 동시에 이벤트리스너 추가
+          number.style.color = '#160eed' 
+          // currentColor.innerText = 'blue'
+          // currentColor.style.color = '#160eed'
+          changeColor('blue')
+        })
+
+      const green = document.querySelector('.green')
+        .addEventListener('click', function (event) { // 선언과 동시에 이벤트리스너 추가
+          number.style.color = '#0ced6a'
+          // currentColor.innerText = 'green'
+          // currentColor.style.color = '#0ced6a'
+          changeColor('green')
+        })
+    </script>
+  </body>
+</html>

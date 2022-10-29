@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>lorem</h1>
+    <div>
+      <!-- emmet으로 lorem1000 + tab -->
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi blanditiis minima animi voluptatibus sed, tenetur modi odio ea laudantium quo, doloremque corrupti rem maiores dolore vel consequuntur cumque sunt ipsa? Lorem ipsum dolor sit amet consectetur adipisicing elit. In amet omnis doloribus sequi, beatae, molestiae ea esse provident, consequuntur reprehenderit a dolores totam dolorum. Inventore a ipsam ex? Quidem, debitis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis accusantium debitis non eaque illum iusto voluptate ea quas nesciunt earum provident dolorem at esse sit aliquid quam est, tempora dolor. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aspernatur alias, minima repellat nulla, aperiam autem laudantium ipsum quos id cupiditate at similique dolore dolores animi sunt, ea nobis cumque corrupti. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, esse. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro quos minus nulla repellendus, accusantium, atque assumenda provident corrupti amet est recusandae, eveniet quod! Odio eaque, sit illo voluptatum exercitationem quo, voluptas harum nam debitis ducimus nulla aperiam? Magni, praesentium? Pariatur voluptates cum praesentium voluptas illum eos eius repellat molestiae voluptatum aliquid distinctio veritatis architecto eveniet doloribus provident exercitationem, sint, error dignissimos neque? Vero perspiciatis officiis error totam mollitia facere porro culpa sit voluptates tempora sint labore aliquam libero, repudiandae fugit sunt asperiores. Nostrum, perferendis. Labore dolores modi in, eligendi dolorem optio quasi placeat molestiae quaerat autem provident exercitationem eius expedita!
+    </div>
+
+    <script>
+      // scroll 은 항상 event와 같이 써야 함
+      function printEvent(e) {
+        if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+          const newText = '더 있지롱~~~ \n'
+          const loremDiv = document.querySelector('div')
+          loremDiv.innerText += newText
+        }
+        // console.log(e)
+        // console.log(window.scrollY)
+      }
+      window.addEventListener('scroll', printEvent)
+
+      const a = window.innerHeight // 내가 보고 있는 화면의 높이는 어느정도인지
+      const b = document.body.scrollHeight // 문서에서 스크롤을 최대한 얼마까지 높일 수 있는지
+      const c = window.scrollY // 어디에 있는지
+      // c + a = b
+    </script>
+  </body>
+</html>
