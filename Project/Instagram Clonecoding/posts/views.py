@@ -1,15 +1,17 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST, require_safe, require_http_methods
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm
-from .models import Post
+from .forms import PostForm, CommentForm
+from .models import Post, Comment
 
 # 일단 로그인 안해도 index는 볼 수 있게 함
 @require_safe
 def index(request):
     posts = Post.objects.all()
+    comment_form = CommentForm()
     context = {
         'posts': posts,
+        'comment_form': comment_form,
     }
     return render(request, 'posts/index.html', context)
 
@@ -54,3 +56,22 @@ def update(request, pk):
         'form': form,
     }
     return render(request, 'posts/form.html', context)
+
+@require_POST
+def comment_create(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.user = request.user
+        comment.post = post
+        comment.save()
+    return redirect('posts:index') # if절 해당 안 될 때도 고려 위해 
+
+@require_POST
+def comment_delete(request, post_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    if request.user == comment.user:
+        comment.delete()
+    return redirect('posts:index')
+    

@@ -26,3 +26,9 @@ class Post(models.Model):
     #   'imagekit',
     # 원본 이미지 저장 방법 사용
     #   ImageSpecField, Thumbnail 이용
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField()

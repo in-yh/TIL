@@ -1,3 +1,5 @@
+{% load bootstrap5 %}
+
 <div class="row row-cols-1 row-cols-md-3 g-4">
   {% comment %} 기본은 하나씩, 창이 md 이상일때는 3개씩 보여줌 {% endcomment %}
   {% for post in posts %}
@@ -15,7 +17,7 @@
           {% comment %} 버튼 한 줄로 나열 {% endcomment %}
           <div class="row">
             <div class="d-flex justify-content-end">
-              <a href="{% url 'posts:update' post.pk %}" class="btn btn-info btn-xs">수정</a>
+              <a href="{% url 'posts:update' post.pk %}" class="btn btn-info btn-sm">수정</a>
               <form action="{% url 'posts:delete' post.pk %}" method="POST">
                 {% csrf_token %}
                 <button type="button" class="btn btn-danger btn-sm">삭제</button>
@@ -23,13 +25,40 @@
             </div>
           </div>
         </div>
-{% comment %} 여기부터 {% endcomment %}
         {% comment %} 작성자 링크 따로 빼줌 {% endcomment %}
         <div class="card-footer text-muted">
           {% comment %} post와 user 연결하고자 외래키 사용 후 참조 사용 {% endcomment %}
           작성자 : <a href="{% url 'accounts:profile' post.user.username %}" class="card-link">{{ post.user.username }}</a>
         </div>
 
+        {% if request.user.is_authenticated %}
+        <div class="card-footer text-muted">
+            {% comment %} 댓글 출력 {% endcomment %}
+            {% for comment in post.comment_set.all %}
+              <div>
+                {{ comment.user }} : {{ comment.content }}
+                <form action="{% url 'posts:comment_delete' post.pk comment.pk %}" method="POST">
+                  {% csrf_token %}
+                  {% buttons %}
+                    <button type="submit" class="btn btn-primary btn-sm">삭제</button>
+                  {% endbuttons %}
+                </form>
+              </div>
+            {% empty %}
+              <p>댓글이 없습니다.</p>
+            {% endfor %}
+
+            {% comment %} 댓글창 {% endcomment %}
+            <form action="{% url 'posts:comment_create' post.pk %}" method="POST">
+              {% csrf_token %}
+              {% bootstrap_form comment_form %}
+              {% buttons %}
+                <button type="submit" class="btn btn-primary btn-sm">입력</button>
+              {% endbuttons %}
+            </form>
+          </div>
+        {% endif %}
+      
       </div>
     </div>
   {% endfor %}
