@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dog API</h1>
+  <img draggable="false" src="./noResult.png" alt="dog">
+  <h2>아직 선택된 사진이 없습니다!</h2>
+  <br>
+  <button>Get dog</button>
+
+  <script>
+    const API_URI = 'https://dog.ceo/api/breeds/image/random'
+
+    function getDog () {
+      fetch(API_URI) // axios 없이도 브라우저에 내장된 fetch() 함수를 이용, 기본 GET 방식
+        .then((response) => response.json()) // 응답 객체는 json() 메서드 제공
+        .then((data) => data.message) // 응답 객체 json 포멧의 응답 전문을 data라는 객체로 변환하여 얻을 수 있음
+        .then((dogUrl) => {
+          const imgTag = document.querySelector('img')
+          imgTag.setAttribute('src', dogUrl)
+          const h2Tag = document.querySelector('h2')
+          return h2Tag
+        }) 
+        .then((h2Tag) => { // 이렇게 해도 글자가 먼저 지워짐.. axios가 아니여서 그런가..
+          document.body.removeChild(h2Tag)
+        })
+    }
+
+    const btnTag = document.querySelector('button')
+    btnTag.addEventListener('click', getDog)
+
+  </script>
+</body>
+</html>
