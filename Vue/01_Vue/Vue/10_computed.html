@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 중요!! -->
+  <div id="app">
+    <h1>data_01 : {{ number1 }}</h1>
+    <h1>data_02 : {{ number2 }}</h1>
+    <hr>
+    <h1>add_method : {{ add_method() }}</h1>
+    <h1>add_method : {{ add_method() }}</h1>
+    <h1>add_method : {{ add_method() }}</h1>
+    <hr>
+    <!-- method는 3번 호출될 때(사용할 때마다) computed 1번만 호출됨, 같은 결과라면 재호출하지 않음(원래 결과값이 저장되어 있으면 그걸 씀. number1이나 number2가 바뀔 때 computed 재계산 됨!) -->
+    <h1>add_computed : {{ add_computed }}</h1> 
+    <h1>add_computed : {{ add_computed }}</h1>
+    <h1>add_computed : {{ add_computed }}</h1>
+    <hr>
+    <button v-on:click="dataChange">Change Data</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        number1: 100,
+        number2: 100
+      },
+      computed: { // 계산된 값!! 함수 아님!!
+        add_computed: function () {
+          console.log('computed 실행됨!')
+          return this.number1 + this.number2
+        }
+      },
+      methods: {
+        add_method: function () {
+          console.log('method 실행됨!')
+          return this.number1 + this.number2
+        },
+        dataChange: function () {
+          this.number1 = 200
+          this.number2 = 300
+        }
+      }
+    })
+  </script>
+</body>
+</html>

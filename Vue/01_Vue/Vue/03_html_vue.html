@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- View -->
+  <div id="app">
+    <p id="name">name : {{ message }}</p> 
+    <!-- script 내 message가 여기로 들어옴 -->
+    <input id="inputName" type="text" v-model="message">
+    <!-- v-model은 입력하는대로 출력해줌 -->
+  </div>
+  
+  <!-- Vue 사용하는 방법 -->
+  <!--  1. .vue 확장자 사용 -->
+  <!--  2. HTML에서 사용할 수 있음. CDN 사용(Vue2 공식 문서 -> Getting Started -> Installation 아래) -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> 
+  <script>
+    // ViewModel
+    const app = new Vue({ // new Vue : 생성자 함수, {}라는 객체 만듦
+      el: '#app',
+      data : {
+        message:'', // Model
+      }
+    }) 
+    // 한 명의 유저가 이름을 변경한다면 화면에서 조작해야 할 영역이 매우 많음
+    // Vue를 통해 데이터를 관리한다면? = 변경 사항도 한 번에 반영
+  </script>
+</body>
+</html>

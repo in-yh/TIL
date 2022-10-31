@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- message 작성하기 전이면 -->
+  <div id="app">
+    {{ message }}
+    <!-- message 속성이 정의되지 않았다는 경고가 뜨고 -->
+  </div>
+
+  <div>
+    {{ message }}
+    <!-- {{ message }}가 그대로 출력됨 -->
+  </div>
+
+  <!-- Vue CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    // CODE HERE
+    // 1. Vue instance constructor
+    // const vm = new Vue()
+    // console.log(vm)
+    // vue instance === 1개의 객체
+    // 아주 많은 속성과 메서드를 이미 가지고 있고, 이러한 기능들을 사용하는 것
+
+    // 2. el(element)
+    const app = new Vue({ // Object 작성
+      el: '#app', // DOM 연결
+      // Vue instance와 DOM을 연결하는 옵션, View와 Model을 연결하는 역할, HTML id 혹은 class와 연결 가능 
+      // Vue instance와 연결되지 않은 DOM 외부는 Vue의 영향을 받지 않음, Vue 속성 및 메서드 사용 불가
+
+      // 3. data // 객체여야 함!
+      data: { // Vue instance에 data 객체 추가
+        message: 'Hello, Vue!' // this.message 형태로 접근 가능
+      },
+
+      // 4. methods
+      methods: {
+        print: function () { // methods에는 화살표 함수 사용 안 함
+          console.log(this.$data.message) // this는 new Vue를 호출하는 객체 // $data 생략 가능(다른 변수값이랑 이름 구분 위해 $ 사용)
+        },
+        // app.print() 실행하면 Hello, Vue! 출력
+
+        bye: function () { // 바꿈
+          this.message = 'Bye, Vue!'
+        },
+        // app.bye() 실행하면 Bye, Vue!로 바뀜
+
+        // 4-1. arrow function
+        arrowBye: () => { // 선언할 때는 화살표 함수 쓰면 안 됨. 콜백함수에서는 사용해도 되지만
+          this.message = 'Arrow Function?'
+          console.log(this) // window // 즉, this가 상위 객체 window를 가리킴
+        }
+      }
+    })
+    console.log(app)
+  </script>
+</body>
+</html>
