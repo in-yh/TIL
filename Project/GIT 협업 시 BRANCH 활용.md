@@ -6,7 +6,7 @@ git switch 'branch 이름' or git checkout 'branch 이름' : 브랜치 들어가
 git status : 상태 확인
 git add .
 git commit -m ''
-git push origin master
+git push origin 'branch 이름'
 
 올리고 나서 병합 후
 git checkout master : master로 가기
