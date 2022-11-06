@@ -24,6 +24,7 @@
     aTag.innerText = '구글'
     // a 태그의 href 속성 추가
     aTag.setAttribute('href', 'https://google.com')
+    console.log(aTag.getAttribute('href'))
 
     // div태그 먼저 선택해줘야 함, 자식태그로 aTag 추가
     const divTag = document.querySelector('div')
@@ -33,6 +34,7 @@
     const h1Tag = document.querySelector('h1')
     h1Tag.classList.toggle('blue')
     // h1Tag.classList // DOMTokenList(2) ['red', 'blue', value: 'red blue']
+    // style 태그에서 가장 마지막 것이 가장 쎔
     h1Tag.classList.toggle('blue')
     // h1Tag.classList // DOMTokenList ['red', value: 'red']
     // 클래스가 존재한다면 제거하고 false를 반환,

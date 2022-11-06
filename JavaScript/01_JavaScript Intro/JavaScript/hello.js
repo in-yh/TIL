@@ -40,21 +40,23 @@
 //   return `Hi ${name}`  
 // }
 
-// 1단계 가장 많음!
+// 1단계, 가장 많음!
 // const greeting = (name) => { // 여기서 화살표를 넣어줘야 해
 //   return `Hi ${name}`  
 // }
 // 인자가 없다면 () or _ 로 표시
 
-// 2단계 권장하지 않음
+// 2단계, 권장하지 않음(소괄호 치는 것을 권장 (name))
 // const greeting = name => {
 //   return `Hi ${name}`  
 // }
 // object를 return한다면 return을 명시적으로 적어준다.
-
-// 3단계 소괄호 치는 것을 권장 (name)
-// const greeting = name => `Hi ${name}`  
+// let returnObject = () => { return {key: 'value'} }
 // return을 적지 않으려면 괄호를 붙어야 한다.
+// returnObject = () => ({key: 'value'})
+
+// 3단계, 
+// const greeting = (name) => `Hi ${name}`  
 
 // 즉시 실행 함수
 // 선언되자마자 실행되는 함수, 다시 같은 함수를 다시 호출할 수 없음, 일회성 함수이므로 익명함수로 사용하는 것이 일반적
