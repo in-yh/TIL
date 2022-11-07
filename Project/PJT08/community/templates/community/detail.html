@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="text-center">DETAIL</h2>
+  <h3>{{ review.pk }} 번째 글</h3>
+  <hr>
+  <p>제목: {{ review.title }}</p>
+  <p>영화 제목: {{ review.movie_title }}</p>
+  <p>내용: {{ review.content }}</p>
+  <p>평점: {{ review.rank }}</p>
+  <p>작성 시각: {{ review.created_at }}</p>
+  <p>수정 시각: {{ review.updated_at }}</p>
+  <hr>
+  <h4>댓글 목록</h4>
+  {% if comments|length %}
+    <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p>
+  {% endif %}
+  {% for comment in comments %}
+    <ul>
+      <li>
+        {{ comment.user }} - {{ comment.content }}
+          <form style="display:inline;" action="{% url 'community:like_comment' review.pk comment.pk %}" method="POST">
+            {% csrf_token %}
+            {% if request.user in comment.like_users.all %}
+              <button>좋아요 취소</button>
+            {% else %}
+              <button>좋아요</button>
+            {% endif %}
+            <span>{{ comment.like_users.count }}</span>
+          </form>
+
+          {% comment %} 대댓글 목록 보여주기 {% endcomment %}
+          {% for recomment in comment.recomment_set.all %}
+            <ul><li>
+              {{ recomment.user }} - {{ recomment.content }}
+              <form style="display:inline;" action="{% url 'community:like_recomment' review.pk comment.pk recomment.pk %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in recomment.like_users.all %}
+                  <button>좋아요 취소</button>
+                {% else %}
+                  <button>좋아요</button>
+                {% endif %}
+                <span>{{ recomment.like_users.count }}</span>
+              </form>
+            </li></ul>
+          {% endfor %}
+      </li>
+    </ul>
+    
+    <form action="{% url 'community:create_recomment' review.pk comment.pk %}" method="POST">
+      {% csrf_token %}
+      {{ recomment_form }}
+      <button>대댓글 작성</button>
+    </form>
+    <hr>
+  {% empty %}
+    <p><b>댓글이 없어요..</b></p>
+  {% endfor %}
+
+  {% if user.is_authenticated %}
+    <form action="{% url 'community:create_comment' review.pk %}" method="POST">
+      {% csrf_token %}
+      {{ comment_form }}
+      <input type="submit">
+    </form>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
+  {% endif %}
+  <a href="{% url 'community:index' %}">[back]</a>
+{% endblock  %}

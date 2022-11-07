@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Community</h1>
+  <hr>
+  {% for review in reviews %}
+    <p>작성자 : <a href="{% url 'accounts:profile' review.user.username %}">{{ review.user }}</a></p>
+    <p>글 번호: {{ review.pk }}</p>
+    <p>글 제목: {{ review.title }}</p>
+    <p>글 내용: {{ review.content }}</p>
+    <form id="like-forms" data-review-id="{{ review.pk }}">
+      {% csrf_token %}
+      {% if user in review.like_users.all %}
+        {% comment %} 한 페이지에 버튼 등 여러 개 있다면 pk로 구분해줘야 함 {% endcomment %}
+        <button id="like-{{ review.pk }}">좋아요 취소</button>
+      {% else %}
+        <button id="like-{{ review.pk }}">좋아요</button>
+      {% endif %}
+    </form>
+    <p>
+      <span id="likes-count-{{ review.pk }}">{{ review.like_users.all|length }}</span> 명이 이 글을 좋아합니다.
+    </p>
+    <a href="{% url 'community:detail' review.pk %}">[detail]</a>
+    <hr>
+  {% endfor %}
+{% endblock %}
+
+{% block script %}
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    {% comment %} 리뷰마다 좋아요 기능 붙여줘야 하므로 forEach와 querySelectorAll 사용 {% endcomment %}
+    const likeForms = document.querySelectorAll('#like-forms')
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+    
+    likeForms.forEach((likeForm) => {
+      likeForm.addEventListener('submit', function (event) {
+        event.preventDefault()
+        const reviewId = event.target.dataset.reviewId
+  
+        axios({
+          method: 'post',
+          url: `${reviewId}/like/`,
+          headers: {'X-CSRFToken': csrftoken},
+        })
+          .then((response) => {
+            const likeButton = document.querySelector(`#like-${reviewId}`)
+            if (response.data.is_liked===true) {
+              // 좋아요 취소 버튼 출력
+              likeButton.innerText = '좋아요 취소'
+            } else {
+              // 좋아요 버튼 출력
+              likeButton.innerText = '좋아요'
+            }
+            // 좋아요 개수 
+            const likesCountTag = document.querySelector(`#likes-count-${reviewId}`)
+            const likesCount = response.data.likes_count
+            likesCountTag.innerText = likesCount
+          })
+          .catch((error) => {
+            console.log(error.response)
+          })
+      })
+    })
+  </script>
+{% endblock script %}
+
