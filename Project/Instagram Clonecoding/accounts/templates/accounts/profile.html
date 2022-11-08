@@ -79,7 +79,15 @@
         {% endfor %}
         
     {% else %}
-        <h1>{{ person }} 님의 프로필</h1>
+        <h1 style="display:inline;">{{ person }} 님의 프로필</h1>
+        <form style="display:inline;" action="{% url 'accounts:follow' person.pk %}" method="POST">
+          {% csrf_token %}
+          {% if request.user in person.followers.all %}
+            <button class="btn btn-primary">팔로우 취소</button>
+          {% else %}
+            <button class="btn btn-primary">팔로우</button>
+          {% endif %}
+        </form>
 
         <hr>
             

@@ -5,6 +5,7 @@ from django.conf import settings
 
 # Create your models here.
 class Post(models.Model):
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="like_posts")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) # Post와 User 연결하고자
     content = models.TextField()
     image = models.ImageField(blank=True)

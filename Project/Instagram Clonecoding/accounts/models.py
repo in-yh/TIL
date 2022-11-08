@@ -6,7 +6,7 @@ from imagekit.processors import Thumbnail
 
 # Create your models here.
 class User(AbstractUser):
-    pass
+    followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
 
 class Profile(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) # User는 settings.AUTH_USER_MODEL로 받기 

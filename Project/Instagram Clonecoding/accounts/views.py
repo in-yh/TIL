@@ -10,6 +10,8 @@ from django.contrib.auth import get_user_model
 from .models import Profile
 from .forms import ProfileUpdateForm
 
+from django.views.decorators.http import require_POST
+
 # Create your views here.
 def login(request):
     if request.method == 'POST':
@@ -121,3 +123,15 @@ def profile_update(request, profile_pk):
 
 # 문제점1 : profile 수정할 때 정보가 없으면 에러 발생 => 회원가입 시, 프로필 생성할 수 있도록 form 같이 넣어줌!
 # 문제점2 : user 1개당 profile 1개만 생성되게 함(여러개면 이상해서..)
+
+
+@require_POST
+def follow(request, user_pk):
+    User = get_user_model()
+    person = User.objects.get(pk=user_pk)
+    if person != request.user: # 내 프로필이 아니라면
+        if request.user in person.followers.all():
+            person.followers.remove(request.user)
+        else:
+            person.followers.add(request.user)
+        return redirect('accounts:profile', person.username)
