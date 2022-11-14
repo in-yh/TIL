@@ -164,4 +164,33 @@
 
    나) SPA 상에서 라우팅을 쉽게 개발할 수 있는 기능을 제공
 
-   다) 라우트에 컴포넌트를 매핑한 후, 어떤 URL에서 렌더링 할지 알려줌
+   다) 라우트(routes)에 컴포넌트를 매핑한 후, 어떤 URL에서 렌더링 할지 알려줌
+   
+   * 즉, SPA를 MPA처럼 URL을 이동하면서 사용 가능
+   * SPA의 단점 중 하나인 "URL이 변경되지 않는다."를 해결
+   * 보여지는 컴포넌트만 교체되는 것이고, URL을 바꿔준다. 페이지는 하나인데 마치 이동하는 것처럼 착각하게 만든다.(사실은 싱글 페이지, 여러개인 것처럼 보여짐, 뒤로가기 가능)
+   
+   라) (참고) MPA(Multiple Page Application)
+   
+   * 여러 개의 페이지로 구성된 애플리케이션
+   * SSR 방식으로 렌더링
+   
+   마) 시작하기
+   
+   * ```bash
+     vue create vue-router-app // Vue 프로젝트 생성
+     cd vue-router-app // 디렉토리 이동
+     vue add router // Vue CLI를 통해 router plugin 적용
+     // 기존에 프로젝트를 진행하고 있던 도중에 router를 추가하게 되면 App.vue를 덮어쓰므로 필요한 경우 명령을 실행하기 전에 파일을 백업해두어야 함
+     
+     history mode 사용여부 -> yes
+     // History mode
+     //	브라우저의 History API를 활용한 방식
+     // 		새로고침 없이 URL 이동 기록을 남길 수 있음
+     //	우리에게 익숙한 URL 구조로 사용 가능
+     //		예시) http://localhost:8080/index
+     //	History mode를 사용하지 않으면 Default 값인 hash mode로 설정됨('#'을 통해 URL을 구분하는 방식)
+     //		예시) http://localhost:8080#index
+     ```
+   
+     
