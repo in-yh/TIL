@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <h1>MovieCloud</h1>
+    <h5>Category</h5>
+    
+    {% comment %} RadioSelector {% endcomment %}
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+        <label class="form-check-label" for="inlineRadio1">장르별</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+        <label class="form-check-label" for="inlineRadio2">시대별</label>
+      </div>
+      
+      {% comment %} 선택하면 바로 링크로 넘어가게 함 {% endcomment %}
+      {% comment %} <a href="/">
+        <input type="radio" style="pointer-events:none;">
+      </a> {% endcomment %}
+      
+      {% comment %} <form name=xx> 
+        <input type="radio" name="checkbox" ID="ID1"> 
+        <a href="#" onClick="selectID('ID1'); return false;">Radio Button Description #1</a>
+        <br> <input type="radio" name="checkbox" ID="ID2"> 
+        <a href="#" onClick="selectID('ID2'); return false;">Radio Button Description #2</a>
+        <br> <input type="radio" name="checkbox" ID="ID3"> 
+        <a href="#" onClick="selectID('ID3'); return false;">Radio Button Description #3</a>
+        <br> <input type="radio" name="checkbox" ID="ID4"> 
+        <a href="#" onClick="selectID('ID4'); return false;">Radio Button Description #4</a>
+        <br> 
+      </form> {% endcomment %}
+      
+    </div>
+    
+    <div id="container"></div>
+    
+  </div>
+{% endblock content %}
+
+
+{% block script %}
+{% comment %} axios CDN 작성 {% endcomment %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% comment %} AnyChart cdn {% endcomment %}
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-tag-cloud.min.js"></script>
+<script>
+
+  const genre_button = document.querySelector('#inlineRadio1')
+
+  genre_button.addEventListener('click', function (event) {{
+    axios({
+      method: 'get',
+      url: 'http://127.0.0.1:8000/movies/category/genre/',
+    })
+      .then((response) => {
+        console.log(response.data.result)
+
+        anychart.onDocumentReady(function () {
+        const data = response.data.result
+
+        const chart = anychart.tagCloud(data)
+
+        chart.title("Tag Cloud Chart: Interactivity\n(Opening Links when Words Are Clicked On)")
+
+        // set the container id
+        chart.container("container")
+
+        // initiate drawing the chart
+        chart.draw()
+
+          // add an event listener to open a url on click
+          chart.listen("pointClick", function(e){
+            const url = "//en.wiktionary.org/wiki/" + e.point.get("x")
+            window.open(url, "_blank")
+          });
+        })
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+
+  }})
+
+</script>
+{% endblock script %}

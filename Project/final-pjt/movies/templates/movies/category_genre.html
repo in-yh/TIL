@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>category</h1>
+  <div id="canvas" class="canvas"></div>
+{% endblock content %}
+
+
+{% block script %}
+{% comment %} axios CDN 작성 {% endcomment %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% comment %} AnyChart cdn {% endcomment %}
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-tag-cloud.min.js"></script>
+
+
+{% comment %} <script src="https://pulipulichen.github.io/blogger/posts/2016/11/r-text-mining/wordcloud2.js"></script>
+<canvas id="word_cloud" class="word_cloud" width="400" height="400"></canvas> {% endcomment %}
+
+<script src="./src/wordcloud2.js"></script>
+<script>
+
+    const data = [
+      [모험 = 528],
+      [판타지 = 422],
+      [애니메이션 = 459],
+      [드라마 = 497],
+
+    ];
+
+    WordCloud(document.getElementById('canvas'), {
+      list: data,
+      fontFamily: '',
+      fontWeight: 'normal',
+      color: 'random-dark',
+      minSize: 0, // 0 to disable
+      weightFactor: 1,
+      clearCanvas: true,
+      backgroundColor: '#fff', // opaque white = rgba(255, 255, 255, 1)
+      gridSize: 8,
+      drawOutOfBound: false,
+      shrinkToFit: false,
+      origin: null, // origin of the “cloud” in [x, y]
+      drawMask: false, // visualize the grid
+      maskColor: 'rgba(255,0,0,0.3)',
+      maskGapWidth: 0.3,
+      wait: 0,
+      abortThreshold: 0, // disabled
+      abort: function noop () {},
+      minRotation: -Math.PI / 2,
+      maxRotation: Math.PI / 2,
+      rotationSteps: 0,
+      shuffle: true,
+      rotateRatio: 0.1,
+      // circle, cardioid, diamond, square, triangle-forward, 
+      // triangle, pentagon, and star
+      shape: 'circle',
+      ellipticity: 0.65,
+      // allows the user to define the class of the span elements
+      classes: null,
+      // callback
+      hover: null,
+      click: null
+      
+    });
+
+
+    {% comment %} 
+    list = [];
+    for (var i in data) {
+      list.push([data[i]['x'], data[i]['value']])
+    }
+
+    WordCloud.minFontSize = "15px"
+    WordCloud(document.getElementById('word_cloud'), { list: list} ); {% endcomment %}
+</script>
+
+
+{% endblock script %}
+
+{% comment %} https://dev.to/asmit2952/animated-text-sphere-in-javascript-using-tagcloud-js-1p72 {% endcomment %}
+
+{% comment %} https://www.cssscript.com/tag-word-cloud/ {% endcomment %}
