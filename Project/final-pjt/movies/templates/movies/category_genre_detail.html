@@ -1,12 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>category</h1>
   <div id="container"></div>
-  
-{% load static %}
-  <link rel="stylesheet" href="{% static "category.css" %}">
-
 {% endblock content %}
 
 
@@ -22,7 +17,7 @@
     var data = {{ j_results|safe }}
 
     // create a chart and set the data
-    var chart = anychart.tagCloud(data);
+    var chart = anychart.tagCloud(data)
 
     chart.angles([0])
 
@@ -32,18 +27,17 @@
     // initiate drawing the chart
     chart.draw()
 
-    chart.mode("spiral")
+    chart.mode("spiral");
 
     // add an event listener to open a url on click
     chart.listen("pointClick", function(e){
-      var url = "http://127.0.0.1:8000/movies/category/genre/" + e.point.get("x")
+      var url = "http://127.0.0.1:8000/movies/movie/" + e.point.get("y")
       location.href=url // url로 이동
+    
     })
-
     var background = chart.background()
     background.fill('transparent')
 
 })
 </script>
-
 {% endblock script %}
