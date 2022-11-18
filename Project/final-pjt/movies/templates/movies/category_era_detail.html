@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div id="container"></div>
+{% endblock content %}
+
+
+{% block script %}
+{% comment %} AnyChart cdn {% endcomment %}
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-tag-cloud.min.js"></script>
+
+<script type="text/javascript"> 
+  anychart.onDocumentReady(function () {
+
+    // create data (json 데이터를 자바스크립트언어로 바꿈)
+    var data = {{ j_results|safe }}
+
+    // create a chart and set the data
+    var chart = anychart.tagCloud(data)
+
+    chart.angles([0])
+
+    // set the container id
+    chart.container("container")
+
+    // initiate drawing the chart
+    chart.draw()
+
+    chart.mode("spiral");
+
+    // add an event listener to open a url on click
+    chart.listen("pointClick", function(e){
+      var url = "http://127.0.0.1:8000/movies/movie/" + e.point.get("y")
+      location.href=url // url로 이동
+    
+    })
+    var background = chart.background()
+    background.fill('transparent')
+
+})
+</script>
+{% endblock script %}

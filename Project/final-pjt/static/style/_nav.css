@@ -29,7 +29,10 @@
 }
 
 .my-nav > .my-info {
-  /*  */
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
 }
 
 

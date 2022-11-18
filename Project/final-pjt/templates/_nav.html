@@ -1,6 +1,5 @@
 {% load bootstrap5 %}
 
-{% comment %} <div class="d-flex justify-content-end"> {% endcomment %}
   <div class="my-nav">
     <div class="my-logo">
       <a href="">로고</a>
@@ -8,33 +7,28 @@
     
     <div class="my-info">
       {% if request.user.is_authenticated %} 
-        <div>
-            <form action="{% url 'accounts:logout' %}" method="POST">
-              {% csrf_token %}
-              <input type="submit" class="btn btn-primary" value="Logout">
-            </form>
-            <form action="{% url 'accounts:delete' %}" method="POST"> 
-              {% csrf_token %}
-              <input type="submit" class="btn btn-danger" value="회원탈퇴">
-            </form>
-            <a href="{% url 'accounts:update' %}" class="btn btn-warning">회원정보수정</a> 
+        <div class="m-2">
+          <form action="{% url 'accounts:logout' %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="Logout">
+          </form>
         </div>
+        <div class="m-2">
+          <form action="{% url 'accounts:delete' %}" method="POST"> 
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="회원탈퇴">
+          </form>
+        </div>
+        <a href="{% url 'accounts:update' %}" class="ms-2 btn btn-warning">회원정보수정</a> 
       {% else %}
       <div>
         <a href="{% url 'accounts:login' %}" class="m-2 btn btn-primary">
           {% comment %} <img id="login_icon" src="../static/login.png" alt="login"> {% endcomment %}로그인
         </a>
-        <a href="{% url 'accounts:signup' %}" class="m-2 btn btn-success">
+        <a href="{% url 'accounts:signup' %}" class="ms-2 btn btn-success">
           {% comment %} <img id="signup_icon" src="../static/sign_up.png" alt="login"> {% endcomment %}회원가입
         </a>
       </div>
       {% endif %}
     </div>
   </div>
-
-  {% comment %} <div class="d-flex justify-content-end"> {% endcomment %}
-  
-{% comment %} {% else %} {% endcomment %}
-  {% comment %} <div class="d-flex justify-content-end"> {% endcomment %}
-  
-{% comment %} {% endif %} {% endcomment %}
