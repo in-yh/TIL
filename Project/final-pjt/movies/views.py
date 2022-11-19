@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Count
-from .models import Genre, Movie
+from .models import Genre, Movie, Detail
 import json, random, datetime
 from django.db.models.functions import TruncYear
 
@@ -55,17 +55,19 @@ def category_genre_detail(request, genre_name):
 
 def movie_detail(request, movie_pk):
     movie = Movie.objects.get(pk=movie_pk)
+    detail = Detail.objects.get(pk=movie_pk)
 
     movie_information = [
         {'x': movie.title, 'y': movie.poster_path, 'value' : 100},
         {'x': movie.vote_avg, 'y': movie.poster_path, 'value' : 100},
         {'x': movie.popularity, 'y': movie.poster_path, 'value' : 100},
         {'x': str(movie.released_date)[0:10], 'y': movie.poster_path, 'value' : 100},
-        # {'x': str(movie.overview), 'value' : 100},
+        {'x': movie.overview, 'value' : 50},
     ]
     j_results = json.dumps(movie_information)
     context = {
         'j_results': j_results,
+        'detail' : detail,
     }
     return render(request, 'movies/movie_detail.html', context)
 
@@ -145,3 +147,43 @@ def category_era_detail(request, era):
         'j_results': j_results,
     }
     return render(request, 'movies/category_era_detail.html', context)
+
+
+def category_country(request):
+    country_countmovies = Detail.objects.values('production_countries').annotate(Count('pk'))
+    # <QuerySet [{'production_countries': 'Argentina', 'pk__count': 26}, {'production_countries': 'Australia', 'pk__count': 57}, ...
+    results = []
+    for country_countmovie in country_countmovies:
+        results.append(
+            {
+                'x': country_countmovie['production_countries'], 
+                # 'y':
+                'value': country_countmovie['pk__count'],
+            }
+        )
+    j_results = json.dumps(results) # json으로 담기
+    context = {
+        'j_results': j_results,
+    }
+    return render(request, 'movies/category_country.html', context)
+
+
+def category_country_detail(request, country): # 맨 처음 영문 대문자로 받아야 함
+    country_movies = Detail.objects.filter(production_countries=country)
+    random_details = random.choices(country_movies, k=40)
+
+    movies_dict = []
+    for detail in random_details:
+        movie = Movie.objects.get(pk=detail.pk)
+        movies_dict.append(
+            {
+                'x': movie.title, 
+                'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
+                'value' : movie.vote_avg
+            }
+        )
+    j_results = json.dumps(movies_dict)
+    context = {
+        'j_results': j_results,
+    }
+    return render(request, 'movies/category_country_detail.html', context)
