@@ -11,4 +11,6 @@ urlpatterns = [
     path('category/era/<str:era>/', views.category_era_detail, name='category_era_detail'),
     path('category/country/', views.category_country, name='category_country'),
     path('category/country/<str:country>/', views.category_country_detail, name='category_country_detail'),
+    path('movie/<int:movie_pk>/click/', views.movie_click, name='movie_click'),
+    path('movie/recommend/', views.movie_recommend, name='movie_recommend'),
 ]

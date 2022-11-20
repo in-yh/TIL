@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Count
 from .models import Genre, Movie, Detail
 import json, random, datetime
@@ -187,3 +187,29 @@ def category_country_detail(request, country): # 맨 처음 영문 대문자로 
         'j_results': j_results,
     }
     return render(request, 'movies/category_country_detail.html', context)
+
+
+def movie_click(request, movie_pk):
+    movie = Movie.objects.get(pk=movie_pk)
+    movie.click_count += 1
+    movie.save() # 저장 반드시 하기
+    return redirect('movies:movie_detail', movie_pk)
+
+
+def movie_recommend(request):
+    movies_click10 = Movie.objects.order_by('-click_count')[:10]
+
+    movies_dict = []
+    for movie in movies_click10:
+        movies_dict.append(
+            {
+                'x': movie.title, 
+                'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
+                'value' : movie.click_count
+            }
+        )
+    j_results = json.dumps(movies_dict)
+    context = {
+        'j_results': j_results,
+    }
+    return render(request, 'movies/recommend.html', context)

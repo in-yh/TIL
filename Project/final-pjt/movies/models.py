@@ -15,6 +15,7 @@ class Movie(models.Model):
     overview = models.TextField(blank=True)
     poster_path = models.TextField(blank=True, null=True)
     genres = models.ManyToManyField(Genre, related_name='movies', blank=True)
+    click_count = models.IntegerField()
     
     
 class Detail(models.Model):    
