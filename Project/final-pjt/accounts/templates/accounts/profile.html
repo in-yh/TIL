@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container" style="width:100%; height:100%;">
+    <div class="row" style="width:100%; height:100%;">
+      <div id="container1" class="col-6" style="width:50%; height:100%;"></div>
+      <div id="container2" class="col-6" style="width:50%; height:100%;"></div>
+    </div>
+  </div>
+{% endblock content %}
+
+
+{% block script %}
+{% comment %} AnyChart cdn {% endcomment %}
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-tag-cloud.min.js"></script>
+
+<script type="text/javascript"> 
+  anychart.onDocumentReady(function () {
+
+    // 워드 클라우드
+    // create data (json 데이터를 자바스크립트언어로 바꿈)
+    var data1 = {{ j_results1|safe }}
+
+    // create a chart and set the data
+    var chart = anychart.tagCloud(data1)
+
+    chart.angles([0])
+
+    // set the container id
+    chart.container("container1")
+
+    // initiate drawing the chart
+    chart.draw()
+
+    //chart.mode("spiral");
+    chart.hovered().fill("#fc0834")
+    chart.normal().stroke("#0a104f")
+    chart.normal().fontWeight(700)
+    chart.normal().fontFamily('Comic Sans MS')
+    chart.textSpacing(10)
+
+    // add an event listener to open a url on click
+    chart.listen("pointClick", function(e){
+      var url = "http://127.0.0.1:8000/movies/movie/" + e.point.get("y") + "/click/"
+      location.href=url // url로 이동   
+    })
+    var background1 = chart.background()
+    background1.fill('transparent')
+
+
+    // 도넛 차트
+    var data2 = {{ j_results2|safe }}
+
+    // create a pie chart and set the data
+    var chart = anychart.pie(data2)
+
+    /* set the inner radius
+    (to turn the pie chart into a doughnut chart)*/
+    chart.innerRadius("30%")
+
+    // set the container id
+    chart.container("container2")
+
+    // initiate drawing the chart
+    chart.draw()
+
+    var background2 = chart.background()
+    background2.fill('transparent')
+})
+</script>
+{% endblock script %}

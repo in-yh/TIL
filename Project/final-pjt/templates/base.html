@@ -13,15 +13,13 @@
     <link rel="stylesheet" href="{% static "style/index.css" %}">
     <link rel="stylesheet" href="{% static "style/category.css" %}">
     <link rel="stylesheet" href="{% static "style/_nav.css" %}">
-    <link rel="stylesheet" href="{% static "style/movie_detail.css" %}">
     <link rel="stylesheet" href="{% static "style/login_signup.css" %}">
 
   </head>
   <body>
-    
     {% include '_nav.html' %}
     <div class="d-flex justify-content-end"><a href="{% url 'movies:movie_recommend' %}" class="btn btn-primary">recommend</a></div>
-
+    
     {% block content %}
     {% endblock content %}
 

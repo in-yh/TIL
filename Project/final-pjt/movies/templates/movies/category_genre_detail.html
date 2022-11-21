@@ -27,7 +27,15 @@
     // initiate drawing the chart
     chart.draw()
 
-    chart.mode("spiral");
+    //chart.mode("spiral");
+    chart.hovered().fill("#fc0834")
+    chart.normal().stroke("#0a104f")
+    chart.normal().fontWeight(700)
+    chart.hovered().fontSize(chart.fontSize() + 10)
+    chart.normal().fontFamily('Comic Sans MS')
+    chart.textSpacing(10)
+
+
 
     // add an event listener to open a url on click
     chart.listen("pointClick", function(e){

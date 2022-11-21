@@ -2,14 +2,19 @@
 {% load bootstrap5 %}
 
 {% block content %}
-  <h1>회원가입</h1>
-  <form action="{% url 'accounts:signup' %}" method="POST">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
-      <button type="submit" class="btn btn-primary">
-        회원가입
-      </button>
-    {% endbuttons %}
-  </form>
+  <div class="section">
+		<div class="container">
+			<div class="card-3d-wrap mx-auto">
+				<div class="center-wrap text-center">
+					<form action="{% url 'accounts:signup' %}" method="POST">
+						{% csrf_token %}
+						{% bootstrap_form form %}
+            <button type="submit" class="btn btn-primary">
+              signup
+            </button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock content %}

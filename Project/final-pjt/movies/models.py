@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 class Genre(models.Model):
@@ -16,6 +17,7 @@ class Movie(models.Model):
     poster_path = models.TextField(blank=True, null=True)
     genres = models.ManyToManyField(Genre, related_name='movies', blank=True)
     click_count = models.IntegerField()
+    click_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="click_movies")
     
     
 class Detail(models.Model):    

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>era</h1>
+  <h1 class="text-center fw-bold">Era</h1>
   <div id="container"></div>
   
 {% load static %}
@@ -33,6 +33,12 @@
     chart.draw()
 
     chart.mode("spiral")
+    chart.hovered().fill("#09094d")
+    chart.normal().stroke("#0a104f")
+    chart.normal().fontWeight(700)
+    chart.hovered().fontSize(95)
+    chart.normal().fontFamily('Comic Sans MS')
+    chart.textSpacing(15)
 
     // add an event listener to open a url on click
     chart.listen("pointClick", function(e){
