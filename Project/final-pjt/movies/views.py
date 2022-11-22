@@ -4,6 +4,7 @@ from .models import Genre, Movie, Detail
 import json, random, datetime
 from django.db.models.functions import TruncYear
 
+
 # @require_safe
 def index(request): 
     return render(request, 'movies/index.html') 
@@ -35,54 +36,59 @@ def category_genre(request):
     
 
 def category_genre_detail(request, genre_name):
-    genre = Genre.objects.get(name=genre_name)
-    movies = genre.movies.all()
-    random_movies = random.choices(movies, k=20)
+    if request.user.is_authenticated:
+        genre = Genre.objects.get(name=genre_name)
+        movies = genre.movies.all()
+        random_movies = random.choices(movies, k=20)
 
-    movies_dict = []
-    for movie in random_movies:
-        movies_dict.append(
-            {
-                'x': movie.title, 
-                'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
-                'value' : movie.vote_avg*30
-            }
-        )
-    j_results = json.dumps(movies_dict)
-    context = {
-        'j_results': j_results,
-    }
-    return render(request, 'movies/category_genre_detail.html', context)
+        movies_dict = []
+        for movie in random_movies:
+            movies_dict.append(
+                {
+                    'x': movie.title, 
+                    'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
+                    'value' : movie.vote_avg*30
+                }
+            )
+        j_results = json.dumps(movies_dict)
+        context = {
+            'genre': genre,
+            'j_results': j_results,
+        }
+        return render(request, 'movies/category_genre_detail.html', context)
+    return redirect('accounts:login')
 
 
 def movie_detail(request, movie_pk):
-    movie = Movie.objects.get(pk=movie_pk)
-    detail = Detail.objects.get(pk=movie_pk)
+    if request.user.is_authenticated:
+        movie = Movie.objects.get(pk=movie_pk)
+        detail = Detail.objects.get(pk=movie_pk)
 
-    # 유저가 무비 클릭하면 유저id-무비id 저장  
-    request.user.click_movies.add(movie_pk)
-    
-    genre_list = ''
-    genres = movie.genres.all()
-    for genre in genres:
-        genre_list = genre_list + ' ' + genre.name
+        # 유저가 무비 클릭하면 유저id-무비id 저장  
+        request.user.click_movies.add(movie_pk)
+        
+        genre_list = ''
+        genres = movie.genres.all()
+        for genre in genres:
+            genre_list = genre_list + ' ' + genre.name
 
-    movie_information = [
-        {'x': f'title : {movie.title}', 'y': movie.poster_path, 'value' : 100},
-        {'x': f'vote average : {movie.vote_avg}', 'y': movie.poster_path, 'value' : 100},
-        {'x': f'popularity : {movie.popularity}', 'y': movie.poster_path, 'value' : 100},
-        {'x': f'released date : {str(movie.released_date)[0:10]}', 'y': movie.poster_path, 'value' : 100},
-        {'x': f'overview : {movie.overview}', 'y': movie.poster_path, 'value' : 50},
-        {'x': f'genre : {genre_list}', 'y': movie.poster_path, 'value' : 100},
-        {'x': f'country : {detail.production_countries}', 'y': movie.poster_path, 'value' : 100},
+        movie_information = [
+            {'x': f'title : {movie.title}', 'y': movie.poster_path, 'value' : 100},
+            {'x': f'vote average : {movie.vote_avg}', 'y': movie.poster_path, 'value' : 100},
+            {'x': f'popularity : {movie.popularity}', 'y': movie.poster_path, 'value' : 100},
+            {'x': f'released date : {str(movie.released_date)[0:10]}', 'y': movie.poster_path, 'value' : 100},
+            {'x': f'overview : {movie.overview}', 'y': movie.poster_path, 'value' : 50},
+            {'x': f'genre : {genre_list}', 'y': movie.poster_path, 'value' : 100},
+            {'x': f'country : {detail.production_countries}', 'y': movie.poster_path, 'value' : 100},
 
-    ]
-    j_results = json.dumps(movie_information)
-    context = {
-        'j_results': j_results,
-        'detail' : detail,
-    }
-    return render(request, 'movies/movie_detail.html', context)
+        ]
+        j_results = json.dumps(movie_information)
+        context = {
+            'j_results': j_results,
+            'detail' : detail,
+        }
+        return render(request, 'movies/movie_detail.html', context)
+    return redirect('accounts:login')
 
 
 def category_era(request):
@@ -140,28 +146,34 @@ def category_era(request):
 
 
 def category_era_detail(request, era):
-    # 시대별 영화 제목 랜덤으로 뽑기
-    era_number = int(era[0:4])
-    startdate = datetime.date(era_number, 1, 1)
-    enddate = datetime.date(era_number+10, 1, 1)
+    if request.user.is_authenticated:
+        # 시대별 영화 제목 랜덤으로 뽑기
+        era_number = int(era[0:4])
+        startdate = datetime.date(era_number, 1, 1)
+        enddate = datetime.date(era_number+10, 1, 1)
 
-    era_movies = Movie.objects.filter(released_date__range=[startdate, enddate])
-    random_movies = random.choices(era_movies, k=40)
+        era_movies = Movie.objects.filter(released_date__range=[startdate, enddate])
+        if era_movies.count() < 20:
+            random_movies = random.choices(era_movies, k=era_movies.count())
+        else:
+            random_movies = random.choices(era_movies, k=20)
 
-    movies_dict = []
-    for movie in random_movies:
-        movies_dict.append(
-            {
-                'x': movie.title, 
-                'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
-                'value' : movie.vote_avg
-            }
-        )
-    j_results = json.dumps(movies_dict)
-    context = {
-        'j_results': j_results,
-    }
-    return render(request, 'movies/category_era_detail.html', context)
+        movies_dict = []
+        for movie in random_movies:
+            movies_dict.append(
+                {
+                    'x': movie.title, 
+                    'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
+                    'value' : movie.vote_avg*30
+                }
+            )
+        j_results = json.dumps(movies_dict)
+        context = {
+            'j_results': j_results,
+            'era_number': era_number,
+        }
+        return render(request, 'movies/category_era_detail.html', context)
+    return redirect('accounts:login')
 
 
 def category_country(request):
@@ -186,31 +198,40 @@ def category_country(request):
 
 
 def category_country_detail(request, country): # 맨 처음 영문 대문자로 받아야 함
-    country_movies = Detail.objects.filter(production_countries=country)
-    random_details = random.choices(country_movies, k=40)
+    if request.user.is_authenticated: 
+        country_movies = Detail.objects.filter(production_countries=country)
 
-    movies_dict = []
-    for detail in random_details:
-        movie = Movie.objects.get(pk=detail.pk)
-        movies_dict.append(
-            {
-                'x': movie.title, 
-                'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
-                'value' : movie.vote_avg
-            }
-        )
-    j_results = json.dumps(movies_dict)
-    context = {
-        'j_results': j_results,
-    }
-    return render(request, 'movies/category_country_detail.html', context)
+        if country_movies.count() < 20:
+            random_details = random.choices(country_movies, k=country_movies.count())
+        else:
+            random_details = random.choices(country_movies, k=20)
+
+        movies_dict = []
+        for detail in random_details:
+            movie = Movie.objects.get(pk=detail.pk)
+            movies_dict.append(
+                {
+                    'x': movie.title, 
+                    'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
+                    'value' : movie.vote_avg*30
+                }
+            )
+        j_results = json.dumps(movies_dict)
+        context = {
+            'j_results': j_results,
+            'country': country,
+        }
+        return render(request, 'movies/category_country_detail.html', context)
+    return redirect('accounts:login')
 
 
 def movie_click(request, movie_pk):
-    movie = Movie.objects.get(pk=movie_pk)
-    movie.click_count += 1
-    movie.save() # 저장 반드시 하기
-    return redirect('movies:movie_detail', movie_pk)
+    if request.user.is_authenticated:
+        movie = Movie.objects.get(pk=movie_pk)
+        movie.click_count += 1
+        movie.save() # 저장 반드시 하기
+        return redirect('movies:movie_detail', movie_pk)
+    return redirect('accounts:login')
 
 
 def movie_recommend(request):
@@ -232,3 +253,4 @@ def movie_recommend(request):
         }
         return render(request, 'movies/recommend.html', context)
     return redirect('accounts:login')
+

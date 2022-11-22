@@ -4,44 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>    
+  <title>Document</title>
+  {% comment %} bootstrap5 cdn 추가 {% endcomment %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> 
+  <link rel="stylesheet" href="{% static "style/movie_detail.css" %}">
   <style>
-    .back {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    } 
     .back::before {
-      content: "";
       background-image: url('https://image.tmdb.org/t/p/original{{ detail.backdrop_path }}'); 
-      position: absolute;
-      background-position: center; 
-      background-size: cover; 
-      background-repeat: no-repeat; 
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      opacity: 0.6;
-    } 
-    html, body, #container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }  
+    }
   </style>
-
 </head>
 <body>
   <div class="back">
+    {% if request.user.is_authenticated %}
+      <div class="my-back" style="margin-left: 35px; margin-right: 35px; padding-top: 90px;"><a href="javascript:history.back()" class="btn detail-btn btn-dark">back</a></div>
+    {% endif %}
+
     <div id="container"></div>
   </div>
-  
+
   {% comment %} AnyChart cdn {% endcomment %}
   <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
   <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-tag-cloud.min.js"></script>
@@ -63,8 +44,8 @@
       // initiate drawing the chart
       chart.draw()
   
-      chart.mode("spiral");
-      chart.hovered().fill("#09094d")
+      chart.mode("spiral")
+      chart.hovered().fill("#ff081c")
       chart.normal().stroke("#0a104f")
       chart.normal().fontWeight(700)
       chart.normal().fontFamily('Comic Sans MS')
@@ -74,6 +55,7 @@
       background.fill('transparent')
     })
   </script>
-  
+  {% comment %} bootstrap5 cdn 추가 {% endcomment %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container" style="width:100%; height:100%;">
-    <div class="row" style="width:100%; height:100%;">
-      <div id="container1" class="col-6" style="width:50%; height:100%;"></div>
-      <div id="container2" class="col-6" style="width:50%; height:100%;"></div>
+  <div class="container" style="width:100%; height: 800px;">
+    <div class="row" style="width:100%; height: 800px;">
+      <div id="container1" class="col-6"></div>
+      <div id="container2" class="col-6"></div>
     </div>
   </div>
 {% endblock content %}
@@ -14,6 +14,7 @@
 {% comment %} AnyChart cdn {% endcomment %}
 <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
 <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-tag-cloud.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-pie.min.js"></script>
 
 <script type="text/javascript"> 
   anychart.onDocumentReady(function () {
@@ -57,13 +58,41 @@
 
     /* set the inner radius
     (to turn the pie chart into a doughnut chart)*/
-    chart.innerRadius("30%")
+    chart.innerRadius("45%")
+
+    var label = anychart.standalones.label();
+    label.text("My Favorite Genre")
+    label.width("100%")
+    label.height("100%")
+    label.adjustFontSize(true)
+    label.fontColor("#60727b")
+    label.hAlign("center")
+    label.vAlign("middle")
+    label.fontFamily('Comic Sans MS')
+
+    // set the label as the center content
+    chart.center().content(label)
 
     // set the container id
     chart.container("container2")
 
     // initiate drawing the chart
     chart.draw()
+
+    //adjust legend
+    var legend = chart.legend()
+    legend.enabled(true)
+    legend.position("top")
+    legend.align("center")
+    // legend.itemsLayout("vertical")
+    legend.fontFamily('Comic Sans MS')
+    legend.fontSize(20)
+
+    //adjust font 
+    var labels = chart.labels()
+    labels.fontColor('white')
+    labels.fontFamily('Comic Sans MS')
+    labels.fontSize(15)
 
     var background2 = chart.background()
     background2.fill('transparent')

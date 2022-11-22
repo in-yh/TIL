@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <h1 class="text-center fw-bold">{{ country }}</h1>
   <div id="container"></div>
 {% endblock content %}
 
@@ -28,21 +29,20 @@
     chart.draw()
 
     chart.mode("spiral");
-    chart.hovered().fill("#09094d")
+    chart.hovered().fill("#ff081c")
     chart.normal().stroke("#0a104f")
     chart.normal().fontWeight(700)
     chart.normal().fontFamily('Comic Sans MS')
     chart.textSpacing(10)
-
 
     // add an event listener to open a url on click
     chart.listen("pointClick", function(e){
       var url = "http://127.0.0.1:8000/movies/movie/" + e.point.get("y") + "/click/"
       location.href=url // url로 이동
     })
+
     var background = chart.background()
     background.fill('transparent')
-
 })
 </script>
 {% endblock script %}

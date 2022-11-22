@@ -3,10 +3,6 @@
 {% block content %}
   <h1 class="text-center fw-bold">Era</h1>
   <div id="container"></div>
-  
-{% load static %}
-  <link rel="stylesheet" href="{% static "category.css" %}">
-
 {% endblock content %}
 
 
@@ -33,10 +29,10 @@
     chart.draw()
 
     chart.mode("spiral")
-    chart.hovered().fill("#09094d")
+    chart.hovered().fill("#ff081c")
     chart.normal().stroke("#0a104f")
     chart.normal().fontWeight(700)
-    chart.hovered().fontSize(95)
+    // chart.hovered().fontSize(95)
     chart.normal().fontFamily('Comic Sans MS')
     chart.textSpacing(15)
 
@@ -48,8 +44,6 @@
 
     var background = chart.background()
     background.fill('transparent')
-
 })
 </script>
-
 {% endblock script %}

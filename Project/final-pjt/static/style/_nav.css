@@ -15,22 +15,24 @@
   padding: 0;
 } */
 
-/* .my-nav {
+.my-nav {
   display: flex; 
   flex-direction: row;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
-} */
+	margin-left: 35px;
+  margin-right: 35px;
+}
 
 /* .my-nav > .my-logo {
 } */
 
-/* .my-nav > .my-info {
+.my-nav > .my-info {
   display: flex;
   flex-direction: row;
   justify-content: end;
   align-items: center;
-} */
+}
 
 
 

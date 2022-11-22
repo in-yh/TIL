@@ -10,10 +10,10 @@
 						{% csrf_token %}
 						{% bootstrap_form form %}
 						{% buttons %}
-							<button type="submit" class="btn btn-primary">
-								Submit
+							<button type="submit" class="btn accounts-btn btn-dark">
+								Login
 							</button>
-							<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+							<p class="mb-0 mt-4 text-center"><a href="{% url 'accounts:change_password' %}" class="link">Forgot your password?</a></p>
 						{% endbuttons %}
 					</form>
 				</div>

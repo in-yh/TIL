@@ -1,14 +1,14 @@
 {% load static %}
 {% load bootstrap5 %}
 
-  {% comment %} <div class="my-nav"> {% endcomment %}
-    {% comment %} <div class="my-logo">
+  <div class="my-nav" style="height: 90px;">
+    <div class="my-logo">
       <a href="{% url 'movies:index' %}">로고</a>
-    </div> {% endcomment %}
+    </div>
     
-    {% comment %} <div class="my-info"> {% endcomment %}
+    <div class="my-info">
       {% if request.user.is_authenticated %}
-        <a href="{% url 'accounts:profile' user.username %}">profile</a>
+        <a href="{% url 'accounts:profile' user.username %}" class="m-4 text-decoration-none">profile</a>
         <form action="{% url 'accounts:logout' %}" method="POST">
           {% csrf_token %}
           <button type="submit" style="border: 0px; background-color: transparent;"><img src="{% static 'images/logout logo.png'%}" alt="logout logo"></button>
@@ -23,14 +23,12 @@
           <a href="{% url 'accounts:update' %}" class="ms-2 btn btn-warning">회원정보수정</a> 
         {% endcomment %}
       {% else %}
-        <div class="d-flex justify-content-end">
           <a href="{% url 'accounts:login' %}" class="m-4 text-decoration-none">
             <img src="{% static 'images/login logo.png'%}" alt="login logo">
           </a>
-          <a href="{% url 'accounts:signup' %}" class="m-4 text-decoration-none">
+          <a href="{% url 'accounts:signup' %}">
             <img src="{% static 'images/signup logo.png'%}" alt="signup logo">
           </a>
-        </div>
       {% endif %}
-    {% comment %} </div> {% endcomment %}
-  {% comment %} </div> {% endcomment %}
+    </div>
+  </div>

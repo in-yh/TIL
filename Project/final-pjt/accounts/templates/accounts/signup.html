@@ -9,9 +9,9 @@
 					<form action="{% url 'accounts:signup' %}" method="POST">
 						{% csrf_token %}
 						{% bootstrap_form form %}
-            <button type="submit" class="btn btn-primary">
-              signup
-            </button>
+						<button type="submit" class="btn accounts-btn btn-dark">
+							Signup
+						</button>
 					</form>
 				</div>
 			</div>

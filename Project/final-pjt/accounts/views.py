@@ -5,7 +5,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth import get_user_model
-import json
+import json, random
 
 
 def login(request): 
@@ -123,7 +123,9 @@ def profile(request, username):
         like_genres = sorted(like_genres , key= lambda x: x['value'], reverse=True)
         like_genres = like_genres[:5]
 
-        j_results1 = json.dumps(movies_dict)
+        random_movies = random.choices(movies_dict, k=20)
+
+        j_results1 = json.dumps(random_movies)
         j_results2 = json.dumps(like_genres)
 
         context = {
