@@ -112,7 +112,7 @@ def profile(request, username):
                 {
                     'x': movie.title, 
                     'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
-                    'value' : movie.vote_avg*30
+                    'value' : movie.vote_avg*movie.vote_count
                 }
             )
             for genre in movie.genres.all():
@@ -122,16 +122,25 @@ def profile(request, username):
         
         like_genres = sorted(like_genres , key= lambda x: x['value'], reverse=True)
         like_genres = like_genres[:5]
+        if movies_dict == []:
+            context = {
+                'person': person,
+                'movies_dict' : movies_dict,
+            }
+        else:
+            if len(movies_dict) < 20:
+                random_movies = random.choices(movies_dict, k=len(movies_dict))
+            else:
+                random_movies = random.choices(movies_dict, k=20)
 
-        random_movies = random.choices(movies_dict, k=20)
+            j_results1 = json.dumps(random_movies)
+            j_results2 = json.dumps(like_genres)
 
-        j_results1 = json.dumps(random_movies)
-        j_results2 = json.dumps(like_genres)
-
-        context = {
-            'person': person,
-            'j_results1': j_results1,
-            'j_results2': j_results2,
-        }
+            context = {
+                'person': person,
+                'movies_dict' : movies_dict,
+                'j_results1': j_results1,
+                'j_results2': j_results2,
+            }
         return render(request, 'accounts/profile.html', context)
     return redirect('accounts:login')

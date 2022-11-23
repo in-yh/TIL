@@ -47,7 +47,7 @@ def category_genre_detail(request, genre_name):
                 {
                     'x': movie.title, 
                     'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
-                    'value' : movie.vote_avg*30
+                    'value' : movie.vote_avg*movie.vote_count
                 }
             )
         j_results = json.dumps(movies_dict)
@@ -75,12 +75,11 @@ def movie_detail(request, movie_pk):
         movie_information = [
             {'x': f'title : {movie.title}', 'y': movie.poster_path, 'value' : 100},
             {'x': f'vote average : {movie.vote_avg}', 'y': movie.poster_path, 'value' : 100},
+            {'x': f'vote count : {movie.vote_count}', 'y': movie.poster_path, 'value' : 100},
             {'x': f'popularity : {movie.popularity}', 'y': movie.poster_path, 'value' : 100},
             {'x': f'released date : {str(movie.released_date)[0:10]}', 'y': movie.poster_path, 'value' : 100},
-            {'x': f'overview : {movie.overview}', 'y': movie.poster_path, 'value' : 50},
             {'x': f'genre : {genre_list}', 'y': movie.poster_path, 'value' : 100},
             {'x': f'country : {detail.production_countries}', 'y': movie.poster_path, 'value' : 100},
-
         ]
         j_results = json.dumps(movie_information)
         context = {
@@ -164,7 +163,7 @@ def category_era_detail(request, era):
                 {
                     'x': movie.title, 
                     'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
-                    'value' : movie.vote_avg*30
+                    'value' : movie.vote_avg*movie.vote_count
                 }
             )
         j_results = json.dumps(movies_dict)
@@ -213,7 +212,7 @@ def category_country_detail(request, country): # 맨 처음 영문 대문자로 
                 {
                     'x': movie.title, 
                     'y': movie.pk, # 영화 디테일 페이지로 들어가기 위해 필요
-                    'value' : movie.vote_avg*30
+                    'value' : movie.vote_avg*movie.vote_count
                 }
             )
         j_results = json.dumps(movies_dict)
@@ -228,7 +227,10 @@ def category_country_detail(request, country): # 맨 처음 영문 대문자로 
 def movie_click(request, movie_pk):
     if request.user.is_authenticated:
         movie = Movie.objects.get(pk=movie_pk)
-        movie.click_count += 1
+        if movie.click_count:
+            movie.click_count += 1
+        else:
+            movie.click_count = 1
         movie.save() # 저장 반드시 하기
         return redirect('movies:movie_detail', movie_pk)
     return redirect('accounts:login')
@@ -253,4 +255,3 @@ def movie_recommend(request):
         }
         return render(request, 'movies/recommend.html', context)
     return redirect('accounts:login')
-

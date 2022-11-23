@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container" style="width:100%; height: 800px;">
-    <div class="row" style="width:100%; height: 800px;">
-      <div id="container1" class="col-6"></div>
-      <div id="container2" class="col-6"></div>
+  <div class="container" style="width:100%; height: 90%;">
+    <div class="row" style="width:100%; height: 100%;">
+      {% if movies_dict %}
+        <div id="container1" class="col-6"></div>
+        <div id="container2" class="col-6"></div>
+      {% else %}
+        <h1 class="text-center">Click movies, please!</h1>
+      {% endif %}
     </div>
   </div>
 {% endblock content %}

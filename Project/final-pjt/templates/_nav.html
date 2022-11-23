@@ -3,15 +3,21 @@
 
   <div class="my-nav" style="height: 90px;">
     <div class="my-logo">
-      <a href="{% url 'movies:index' %}">로고</a>
+      <a href="{% url 'movies:index' %}"><img src="{% static 'images/logo_new_13.png'%}" alt="logo" style="width: 35%"></a>
     </div>
     
     <div class="my-info">
       {% if request.user.is_authenticated %}
-        <a href="{% url 'accounts:profile' user.username %}" class="m-4 text-decoration-none">profile</a>
+        <a href="{% url 'movies:movie_recommend' %}">
+          <img src="{% static 'images/recommend_new_3.png'%}" alt="recommend" class="me-2">
+        </a>
+        <a href="{% url 'accounts:profile' user.username %}" class="m-4 text-decoration-none">
+          <img src="{% static 'images/profile_new_3.png'%}" alt="profile">
+        </a>
+
         <form action="{% url 'accounts:logout' %}" method="POST">
           {% csrf_token %}
-          <button type="submit" style="border: 0px; background-color: transparent;"><img src="{% static 'images/logout logo.png'%}" alt="logout logo"></button>
+          <button type="submit" class="mt-2" style="border: 0px; background-color: transparent;"><img src="{% static 'images/logout_new_3.png'%}" alt="logout logo"></button>
         </form>
         {% comment %} 
           <div class="m-2">
@@ -23,12 +29,12 @@
           <a href="{% url 'accounts:update' %}" class="ms-2 btn btn-warning">회원정보수정</a> 
         {% endcomment %}
       {% else %}
-          <a href="{% url 'accounts:login' %}" class="m-4 text-decoration-none">
-            <img src="{% static 'images/login logo.png'%}" alt="login logo">
-          </a>
-          <a href="{% url 'accounts:signup' %}">
-            <img src="{% static 'images/signup logo.png'%}" alt="signup logo">
-          </a>
+        <a href="{% url 'accounts:login' %}" class="m-4 text-decoration-none">
+          <img src="{% static 'images/login_new_3.png'%}" alt="login logo">
+        </a>
+        <a href="{% url 'accounts:signup' %}">
+          <img src="{% static 'images/signup_new_3.png'%}" alt="signup logo">
+        </a>
       {% endif %}
     </div>
   </div>

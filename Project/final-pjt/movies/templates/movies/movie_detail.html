@@ -17,7 +17,7 @@
 <body>
   <div class="back">
     {% if request.user.is_authenticated %}
-      <div class="my-back" style="margin-left: 35px; margin-right: 35px; padding-top: 90px;"><a href="javascript:history.back()" class="btn detail-btn btn-dark">back</a></div>
+    <div class="my-back"><a href="{% url 'movies:index' %}"><img src="{% static 'images/logo_new_13.png'%}" alt="logo" style="width: 137.896px; height: 52.115px; margin-top: 19px; margin-bottom:19px; margin-left: 35px; margin-right: 35px;"></a></div>
     {% endif %}
 
     <div id="container"></div>

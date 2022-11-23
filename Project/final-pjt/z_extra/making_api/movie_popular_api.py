@@ -17,6 +17,7 @@ def get_movie_datas():
                     'title': movie['title'],
                     'released_date': movie['release_date'],
                     'popularity': movie['popularity'],
+                    'vote_count': movie['vote_count'],
                     'vote_avg': movie['vote_average'],
                     'overview': movie['overview'],
                     'poster_path': movie['poster_path'],

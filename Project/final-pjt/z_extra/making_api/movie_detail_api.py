@@ -23,13 +23,13 @@ def get_movie_detail():
 
             fields = {
                 'backdrop_path' : details['backdrop_path'],
-                'id' : details['id'],
+                'movie_num' : details['id'],
                 'production_countries' : details['production_countries'][0]['name']
             }
 
             data = {
                 "pk": details['id'],
-                "model": "movies.movie",
+                "model": "movies.detail",
                 "fields": fields
             }
 
