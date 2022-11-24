@@ -47,7 +47,7 @@
 
     // add an event listener to open a url on click
     chart.listen("pointClick", function(e){
-      var url = "http://127.0.0.1:8000/movies/movie/" + e.point.get("y") + "/click/"
+      var url = "http://127.0.0.1:8000/movies/movie/" + e.point.get("y")
       location.href=url // url로 이동   
     })
     var background1 = chart.background()

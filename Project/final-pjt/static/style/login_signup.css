@@ -65,3 +65,19 @@
   color: #102770;
   box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
 }
+
+body > div.section > div > div > div > form > div:nth-child(3) > small > ul > li {
+  color: black;
+}
+
+body > div.section > div > div > div > form > div:nth-child(2) > small {
+  color: black;
+}
+
+body > div.section > div > div > div > form > div:nth-child(4) > small {
+  color: black;
+}
+
+.mb-3 {
+  color: black;
+}

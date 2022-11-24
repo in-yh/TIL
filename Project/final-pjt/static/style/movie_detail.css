@@ -35,12 +35,18 @@ html, body {
 
 #container {
     width: 100%;
-    height: 100%;
+    height: 85%;
     margin: 0;
     padding: 0;
 }
 
 .my-back {
 	position: relative;
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+	margin-left: 35px;
+    margin-right: 35px;
     height: 90px;
 }

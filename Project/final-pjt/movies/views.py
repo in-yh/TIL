@@ -65,7 +65,7 @@ def movie_detail(request, movie_pk):
         detail = Detail.objects.get(pk=movie_pk)
 
         # 유저가 무비 클릭하면 유저id-무비id 저장  
-        request.user.click_movies.add(movie_pk)
+        # request.user.click_movies.add(movie_pk)
         
         genre_list = ''
         genres = movie.genres.all()
@@ -227,6 +227,8 @@ def category_country_detail(request, country): # 맨 처음 영문 대문자로 
 def movie_click(request, movie_pk):
     if request.user.is_authenticated:
         movie = Movie.objects.get(pk=movie_pk)
+        # 유저가 무비 클릭하면 유저id-무비id 저장  
+        request.user.click_movies.add(movie_pk)
         if movie.click_count:
             movie.click_count += 1
         else:
