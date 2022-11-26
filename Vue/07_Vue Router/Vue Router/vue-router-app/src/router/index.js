@@ -12,11 +12,13 @@ const isLoggedIn = true
 
 const routes = [
   // 라우터에 관련된 정보 및 설정이 작성 되는 곳
-  // 장소에서의 urls.py와 비슷
+  // 장고에서의 urls.py와 비슷
   // routes에 URL과 컴포넌트를 매핑
   {
     path: '/',
     name: 'home',
+    // 이름을 가지는 routes
+    //  장고에서 path 함수의 name 인자의 활용과 같은 방식
     component: HomeView
   },
   {
